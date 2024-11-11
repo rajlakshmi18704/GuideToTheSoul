@@ -24,18 +24,4 @@
     display: flex;
     background-color: aqua;
   } 
-  .mainhome {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 1vmax;
-    margin: 2vmax;
-    background-image: url(https://t4.ftcdn.net/jpg/01/18/63/21/240_F_118632139_Rpkd51E3757uWWDwyyrjJQVzZVyMFu4X.jpg);
-    background-size: contain; /* Scale the background image to fit within the container */
-    background-position: center; /* Center the image in the container */
-    background-repeat: no-repeat; /* Prevent the background image from repeating */
-    width: 100%; 
-    aspect-ratio: 4 / 1;
-    border-radius: 1rem;
-    background-color: aqua;
-}
+ 

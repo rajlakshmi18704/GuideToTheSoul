@@ -1,32 +1,53 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { options } from '../utils/fetchData'
 import { Box,Typography } from '@mui/material'
-
+import { useNavigate,Link } from 'react-router-dom';
+import { ThemeContext } from '../context/themeContext';
 import Verse from '../Components/Verse'
 import SearchVerses from '../Components/SearchVerses'
 function CardDetails() {
-  
+  const {theme}=useContext(ThemeContext)
   const [chapterDetails,setChapterDetails]=useState("")
   const[VersesDetails,setVersesDetails]=useState([])
-  const [searchTerm, setSearchTerm] = useState(4);
+const [searchedVerse,setSearchedVerse]=useState("")
+  const [searchTerm,setSearchTerm]=useState("")
+ 
   const {id}=useParams()
 
   useEffect(()=>{
 const fetchDetails=async()=>{
+   
 	const ChapterResponse = await fetch(`https://bhagavad-gita3.p.rapidapi.com/v2/chapters/${id}/`, options);
 	const chapter = await ChapterResponse.json();
 
   setChapterDetails(chapter)
   console.log(chapterDetails)
-  const VersesResponse=await fetch(`https://bhagavad-gita3.p.rapidapi.com/v2/chapters/${id}/verses/`, options);
-	const Verses= await VersesResponse.json();
-setVersesDetails(Verses)
-	console.log(Verses);
+
 }
 fetchDetails()
 
   },[])
+  useEffect(()=>{
+    const getverses=async()=>{
+     if(!searchTerm){
+      const VersesResponse=await fetch(`https://bhagavad-gita3.p.rapidapi.com/v2/chapters/${id}/verses/`, options);
+      const Verses= await VersesResponse.json();
+    setVersesDetails(Verses)
+      console.log(Verses);
+      setSearchedVerse(null);
+     }
+    else{
+      const VersesResponse=await fetch(`https://bhagavad-gita3.p.rapidapi.com/v2/chapters/${id}/verses/${searchTerm}/`, options);
+      const Verse= await VersesResponse.json();
+  setSearchedVerse(Verse)
+      console.log(searchedVerse);
+      console.log("Searched Verse:", verse);
+     }
+    }
+  getverses()
+  },[searchTerm])
+ 
   return (
     
     <Box sx={{
@@ -34,17 +55,18 @@ fetchDetails()
       justifyContent: "center",
       flexDirection: "column",
       alignItems: "center",
-      width: { xs: "90%", lg: "30vmax" },
-      padding: { xs: "  1vmax 1vmax", lg: "12vmax 5vmax" },
+      width:  "100vmax" ,
+      padding: { xs: "  1vmax 0.6vmax", lg: "12vmax 0" },
        // Adjusted width for small screens
-    margin: {lg:"0 67%",xs:"28% 10%"} ,
-  
+    margin: {lg:"0 12px",xs:"28% 2%"} ,
+  backgroundColor:theme==="dark"?"#1A1A1A":"white",
       // Responsive padding
     }}>
       <Typography variant="h4" sx={{
         color: "orange",
         fontSize: { xs: "1.5rem", lg: "2rem" }, // Responsive font size
         fontWeight: "400",
+        
         marginBottom:{sx:"1.4vmax",lg:"1vmax"}
       }}>
         Chapter {id}
@@ -56,9 +78,13 @@ fetchDetails()
         alignItems: "center",
         fontWeight: "bold",
         flexWrap: "wrap",
+        width:{xs:"25vmax",lg:"30vmax"},
         fontFamily: "inherit",
         fontSize: { xs: "2rem", lg: "3rem" },
+        marginRight:{xs:"2rem"},
+        color:theme==="dark"?"white":"black",
         marginBottom:{xs:"2vmax",lg:"0.8vmax"} // Responsive font size
+        ,
       }}>
         {chapterDetails.name_translated}
       </Typography>
@@ -69,15 +95,16 @@ fetchDetails()
         lineHeight: { sx: "1.9vmax", lg: "2.5vmax" }, // Responsive line height
         width: { xs: "90%", lg: "67vmax" }
         ,  padding: { xs: "5vmax", lg: "2vmax" },
+       color:theme==="dark"?"white":"#1A1A1A",
         // Responsive width
       }}>
     {chapterDetails.chapter_summary}
       </Typography>
-      <SearchVerses searchTerm={searchTerm} setsearchTerm={setSearchTerm} />
-      {VersesDetails.map(verse=>(
-    <Verse verse={verse}/>
-      )
-
+      <SearchVerses  setsearchTerm={setSearchTerm} />
+      {searchTerm && searchedVerse ? (
+        <Verse verse={searchedVerse} />
+      ) : (
+        VersesDetails.map((verse) => <Verse key={verse.id} verse={verse} />)
       )}
     
     </Box>

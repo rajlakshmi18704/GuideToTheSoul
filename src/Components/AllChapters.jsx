@@ -1,8 +1,10 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import {options} from '../utils/fetchData'
 import ChapterCard from './ChapterCard';
 import { Box } from '@mui/material';
+import { ThemeContext } from '../context/themeContext';
 function AllChapters() {
+  const {theme}=useContext(ThemeContext)
  const  maxlength=200
 const [data,SetData]=useState([])
   useEffect(()=>{
@@ -15,7 +17,7 @@ SetData(chapters)
 fetchData()
   },[])
   return (
-    <Box sx={{display:"flex",flexDirection:"row",flexWrap:"wrap"}}>
+    <Box sx={{display:"flex",flexDirection:"row",flexWrap:"wrap",margin:"0 20px",backgroundColor:theme==="dark"?"black":"white"}}>
       
       {
 data.map((chapter)=>{
