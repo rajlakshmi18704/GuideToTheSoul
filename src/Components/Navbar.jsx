@@ -14,7 +14,14 @@ function Navbar() {
   const {theme,handleOnclick}=useContext(ThemeContext)
   const open = Boolean(anchorEl);
   const navigate=useNavigate()
+  const handleMenuOpen = (event) => {
+    setAnchorEl(event.currentTarget); 
+  };
  
+
+  const handleMenuClose = () => {
+    setAnchorEl(null); 
+  };
   const handleNavigation = (path) => {
     navigate(path); // Navigate to the selected route
     // handleMenuClose(); // Close the menu after navigating
@@ -98,33 +105,37 @@ function Navbar() {
       sm: "8rem",  // Medium devices
       md: "12rem",  // Larger devices (Tablet and Desktop)
       lg: "4rem"  // Large devices (e.g., Large Desktop)
-    },   display:"flex",flexDirection:"row" ,alignItems:"center"}}  onClick={handleOnclick}>
+    },   display:"flex",flexDirection:"row" ,alignItems:"center"}} >
       {theme === 'dark' ? (
-            < LightModeIcon  sx={{ fontSize: "2rem",color: 'yellow' }} />
+            < LightModeIcon  onClick={handleOnclick} sx={{ fontSize: "2rem",color: 'yellow' }} />
          ) : (
-            <DarkModeIcon sx={{ fontSize: "2rem",color:"black"  }} />
+            <DarkModeIcon   onClick={handleOnclick}sx={{ fontSize: "2rem",color:"black"  }} />
          )}
 
       <IconButton 
-        
+         onClick={handleMenuOpen}
         sx={{ 
           display: { xs: 'flex', md: 'none' },  // Only show on small devices
           marginLeft: '10px'
         }}
       >
-        <MenuIcon sx={{ fontSize: '2rem' }} />
+        <MenuIcon sx={{ fontSize: '2rem' ,}} />
       </IconButton>
 
-      {/* Dropdown Menu */}
-      <Menu
+    
+      <Menu sx={{  display:{lg:"none"}}}
         anchorEl={anchorEl}
         open={open}
-     
+        onClose={handleMenuClose}
         PaperProps={{
           style: {
             width: '200px',
-          },
+            backgroundColor: theme === 'dark' ? 'black' : 'white',
+            color: theme === 'dark' ? 'white' : 'black', // Adjusts text color for better visibility
+          
+          }
         }}
+       
       >
        <MenuItem onClick={() => handleNavigation('/')}>Home</MenuItem>
         <MenuItem onClick={() => handleNavigation('/about')}>About</MenuItem>

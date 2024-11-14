@@ -9,6 +9,7 @@ import Quotes from './Pages/Quotes'
 import Navbar from './Components/Navbar'
 import CardDetails from './Pages/CardDetails'
 import {ThemeContext,themes} from './context/themeContext'
+import Footer from './Components/Footer'
 
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
   }
   return (
     <>
+    
     <ThemeContext.Provider value={{theme,handleOnclick}}>
     <Router>
       <Navbar/>
@@ -33,8 +35,9 @@ function App() {
         <Route path="/about" element={<About/>}/>
         <Route path="/donate" element={<Donate/>}/>
         </Routes>
-        
+        <Footer/>
       </Router>
+      
     </ThemeContext.Provider>
     
    
