@@ -16,11 +16,11 @@ Navigate(`/chapter/${id}`)
     sx={{
       
       height: { xs: "auto", md: "15vmax" }, // Responsive height
-      width: { xs: "90vw", sm: "80vw", md: "40vmax" }, // Responsive width
+      width: { xs: "100vw", sm: "80vw", md: "40vmax" }, // Responsive width
       padding: { xs: "2vmax 3vmax", md: "1vmax 2vmax" }, // Responsive padding
       borderRadius: "1vmax",
       backgroundColor:theme==="dark"?"#242424":"#FBFCFC",
-      margin: "10px 20px",
+      margin: "10px 40px",
       transition: "background-color 0.3s ease",
       '&:hover': {
         backgroundColor: theme === "dark" ? "#252525" : "#f5f5dc", // Conditional hover background color
