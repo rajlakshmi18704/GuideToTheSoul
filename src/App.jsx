@@ -10,6 +10,7 @@ import Navbar from './Components/Navbar'
 import CardDetails from './Pages/CardDetails'
 import {ThemeContext,themes} from './context/themeContext'
 import Footer from './Components/Footer'
+import SearchResults from './Components/SearchResults'
 
 
 function App() {
@@ -34,6 +35,7 @@ function App() {
         <Route path="/quotes"element={<Quotes/>}/>
         <Route path="/about" element={<About/>}/>
         <Route path="/donate" element={<Donate/>}/>
+        <Route path="/searchResults" element ={<SearchResults/>}/>
         </Routes>
         <Footer/>
       </Router>

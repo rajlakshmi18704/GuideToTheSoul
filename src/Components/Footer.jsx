@@ -20,15 +20,18 @@ function Footer() {
         <>
             <Box
                 sx={{
+                  
                     backgroundColor: theme === "dark" ? "#1A1A1A" : "white",
                     display:{xs:"none",lg:"flex"},
                     flexDirection: "column",
+                    height:{xs:"12vmax",lg:"5%"},
                     borderTop: "2px solid grey",
                     borderBottom: "2px solid grey",
                     padding: '4rem 2rem',
                     justifyContent: "center",
                     alignItems: "center",
                     marginLeft: "0",
+                    // display:"block"
                 }}
             >
                 <Stack

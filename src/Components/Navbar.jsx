@@ -13,6 +13,7 @@ function Navbar() {
   const [anchorEl, setAnchorEl] = useState(null);
   const {theme,handleOnclick}=useContext(ThemeContext)
   const open = Boolean(anchorEl);
+  const [searchedValue,setSearchedValue]=useState("")
   const navigate=useNavigate()
   const handleMenuOpen = (event) => {
     setAnchorEl(event.currentTarget); 
@@ -70,7 +71,7 @@ function Navbar() {
         {/* Search Input */}
         <Stack   sx={{
  display: { xs: 'none', sm: 'flex', }
-    // Combine properties in a single object
+   
   }}>
          
         <TextField
@@ -88,11 +89,20 @@ function Navbar() {
             '&.Mui-focused fieldset': {
               borderColor: 'orange', // Border color when focused
             },color:theme==='dark'?"white":"black"
-          }, }}
+          }, }}  onChange={(e)=>{
+            setSearchedValue(e.target.value)
+          }}
           InputProps={{
             startAdornment: (
               <InputAdornment position="start">
-                <SearchIcon  sx={{color:theme==="dark"?"white":"black"}}/>  {/* Add the Search icon */}
+                <SearchIcon onClick={()=>{
+                  console.log(searchedValue)
+ handleNavigation(`/SearchResults?query=${searchedValue}`);
+}
+                }
+ 
+                
+                sx={{color:theme==="dark"?"white":"black"}}/>
               </InputAdornment>
             ),
           }}

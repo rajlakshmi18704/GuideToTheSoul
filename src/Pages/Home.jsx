@@ -18,12 +18,11 @@ function Home() {
       }
   
   return (
-    <>
+    <Box sx={{backgroundColor:theme==="dark"?"black":"white"}}>
+   
 
      
-      <div>
-
-</div>
+  
 <Box sx={{ display: "flex",
         flexDirection: "row", 
         flexWrap: "wrap", 
@@ -38,8 +37,8 @@ function Home() {
             flexDirection:"column",
             justifyContent:"center",
             alignItems:"center",
-        width: '95rem',
-        height: '451px',
+        width: {lg:'90vmax',xs:"100%"},
+        height: {lg:'30vmax',xs:"50vmax"},
         backgroundImage: `url(${img})`, 
         backgroundSize: "cover", 
         backgroundPosition: "center", 
@@ -47,15 +46,21 @@ function Home() {
         border: "2px solid #ccc", 
         borderRadius: "8px", 
       }}>
-        <Typography variant='body1'sx={{
-       color:"white"  ,fontSize:{xs:"30px",lg:"60px"}
-        }}>
+        <Box sx={{display:"flex",flexDirection:"column",flexWrap:"wrap",}}>
+        <Typography variant='body1'sx={{display:"flex",flexDirection:"column",flexWrap:"wrap",
+       color:"white",textAlign:"center"  ,fontSize:{xs:"5vmax",lg:"4vmax",justifyContent:"center"}
+        }}> 
         Experience the Gita
-        
-          <span style={{color:"#FEDF89",display:"block"}}>
+        <span style={{color:"#FEDF89",display:"block"}}>
           Anywhere, Anytime
           </span>
         </Typography>
+        
+        
+         
+        </Box>
+       
+       
         <button onClick={()=>{
           chapter('1')
         }} style={{padding:"12px 24px",backgroundColor:"white",marginTop:"40px",borderRadius:"2px",outline:"none",border:"none",fontSize:"16px"}}>Read now</button>
@@ -65,7 +70,7 @@ function Home() {
 <AllChapters/>
 </Box>
 
-    </>
+</Box>
   
   )
 }
