@@ -18,7 +18,8 @@ const handleChange=(e)=>{
   return (
     <Box
       sx={{
-        display: 'flex',
+
+       display: 'flex',
         justifyContent: 'space-between',
         alignItems: 'center',
         borderTop: '2px solid grey',

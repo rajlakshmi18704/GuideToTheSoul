@@ -52,11 +52,12 @@ fetchDetails()
     
     <Box sx={{
       display: "flex",
+      height:"100%",
       justifyContent: "center",
       flexDirection: "column",
       alignItems: "center",
-      width:  "100vmax" ,
-      padding: { xs: "  1vmax 0.6vmax", lg: "12vmax 0" },
+      width:  {lg:"100vmax" ,xs:"80vmax"},
+      padding: { xs: "  1vmax 0.2vmax", lg: "12vmax 0" },
        // Adjusted width for small screens
     margin: {lg:"0 12px",xs:"28% 2%"} ,
   backgroundColor:theme==="dark"?"#1A1A1A":"white",
@@ -78,10 +79,11 @@ fetchDetails()
         alignItems: "center",
         fontWeight: "bold",
         flexWrap: "wrap",
-        width:{xs:"25vmax",lg:"30vmax"},
+        width:{xs:"90vmax",lg:"30vmax"},
         fontFamily: "inherit",
         fontSize: { xs: "2rem", lg: "3rem" },
         marginRight:{xs:"2rem"},
+        marginTop:{xs:"2rem"},
         color:theme==="dark"?"white":"black",
         marginBottom:{xs:"2vmax",lg:"0.8vmax"} // Responsive font size
         ,
@@ -94,9 +96,9 @@ fetchDetails()
         fontFamily: "inherit",
         lineHeight: { sx: "1.9vmax", lg: "2.5vmax" }, // Responsive line height
         width: { xs: "90%", lg: "67vmax" }
-        ,  padding: { xs: "5vmax", lg: "2vmax" },
+        ,  padding: { xs: "1vmax", lg: "2vmax" },
        color:theme==="dark"?"white":"#1A1A1A",
-        // Responsive width
+        
       }}>
     {chapterDetails.chapter_summary}
       </Typography>
@@ -104,7 +106,15 @@ fetchDetails()
       {searchTerm && searchedVerse ? (
         <Verse verse={searchedVerse} />
       ) : (
-        VersesDetails.map((verse) => <Verse key={verse.id} verse={verse} />)
+        <Box sx={{
+          display:"flex",
+          flexDirection:"column",
+          padding:"10px 0",
+         
+        }}>
+ {VersesDetails.map((verse) => <Verse key={verse.id} verse={verse} />)}
+        </Box>
+       
       )}
     
     </Box>

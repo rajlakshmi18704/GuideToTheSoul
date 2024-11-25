@@ -32,14 +32,21 @@ function Navbar() {
   
  
   return (
- <AppBar  b
- sx={{   backgroundColor: theme === 'dark' ? '#252525' : 'white', height: { xs: "14vmax", lg: "6vmax" } }}>
+ <AppBar  
+ sx={{   backgroundColor: theme === 'dark' ? '#252525' : 'white', height: { xs: "14vmax", lg: "6vmax" },  
+ width: {lg:'100%',xs:"100%"} 
+  // width:{lg:"25%",xs:"100vmin"}
+  }}>
    <Toolbar >
-    <Stack  sx={{width:"25%", marginRight: '1.5rem',display:"flex",justifyContent:"center",}}>
-    <Typography variant='h4'sx={{ color:theme==='dark'?"white":"black", fontWeight: '700',fontSize:'2rem',  display: 'inline-block',   padding: '12px 20px',   }} >Bhagwad Gita</Typography>
+    <Stack  sx={{ width: { lg: '25vmax', xs: '150px' }, marginRight: '1.5rem',display:"flex",
+    justifyContent:"space-between",}}>
+    <Typography variant='h4'sx={{ color:theme==='dark'?"white":"black", fontWeight: 
+      '700',fontSize:'2rem',  display: 'inline-block',   padding: '12px 10px',   }} >
+      Bhagwad Gita</Typography>
     </Stack>
   
-<Stack  sx={{   display: { xs: 'none',md: 'none' , sm: 'none',lg: 'flex' },width:"40%",flexDirection: 'row',marginLeft:"0",justifyContent:"space-evenly" ,  marginRight: { xs: '40px', sm: '0' }, }}>
+<Stack  sx={{   display: { xs: 'none',md: 'none' , sm: 'none',lg: 'flex' },width:{lg:"40%",xs:"0"},flexDirection:
+ 'row',marginLeft:"23px",justifyContent:"space-between" ,  marginRight: { xs: '10px', sm: '0' }, }}>
 <NavLink to="/" style={{textDecoration: 'none' ,}}>
           <Typography sx={{color:theme==='dark'?"white":"black",fontSize:'1.5rem'}} >
             Home
@@ -65,7 +72,7 @@ function Navbar() {
           </Typography>
         </NavLink>
         </Stack  >
-        <Stack sx={{display:"flex",flexDirection: 'row',width: "50%",}}>
+        <Stack sx={{display:{lg:"flex"},flexDirection: 'row',width: "400px",}}>
 
        
         {/* Search Input */}
@@ -110,7 +117,7 @@ function Navbar() {
         />
     
         </Stack>
-        <Stack sx={{ justifyContent: "space-between",   marginLeft: { 
+        <Stack sx={{  marginLeft: { 
       xs: "8rem",  // Small devices
       sm: "8rem",  // Medium devices
       md: "12rem",  // Larger devices (Tablet and Desktop)

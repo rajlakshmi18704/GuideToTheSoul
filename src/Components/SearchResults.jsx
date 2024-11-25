@@ -55,10 +55,12 @@ function SearchResults() {
    
   {filteredData && filteredData.length > 0 ? (
         filteredData.map((verse) => (
-          <div key={verse.id}>
-            <h3>{verse.slug}</h3>
-            <h2>{verse.translations[4].description}</h2>
-            <p>{verse.transliteration}</p>
+          <div key={verse.id} style={{marginTop:"12vmax"}}>
+            <SeacrhCard slug={verse.slug} transliteration={verse.transliteration} 
+            description={verse.translations[4].description
+
+            }/>
+           
           </div>
         ))
       ) : (
