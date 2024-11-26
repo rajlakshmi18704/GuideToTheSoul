@@ -118,7 +118,7 @@ function Navbar() {
     
         </Stack>
         <Stack sx={{  marginLeft: { 
-      xs: "8rem",  // Small devices
+      xs: "20%",  // Small devices
       sm: "8rem",  // Medium devices
       md: "12rem",  // Larger devices (Tablet and Desktop)
       lg: "4rem"  // Large devices (e.g., Large Desktop)
@@ -133,7 +133,7 @@ function Navbar() {
          onClick={handleMenuOpen}
         sx={{ 
           display: { xs: 'flex', md: 'none' },  // Only show on small devices
-          marginLeft: '10px'
+          marginLeft: '5px'
         }}
       >
         <MenuIcon sx={{ fontSize: '2rem' ,}} />

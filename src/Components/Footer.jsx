@@ -27,7 +27,7 @@ function Footer() {
                     height:{xs:"12vmax",lg:"5%"},
                     borderTop: "2px solid grey",
                     borderBottom: "2px solid grey",
-                    padding: '4rem 2rem',
+                   padding: '2rem 1rem',
                     justifyContent: "center",
                     alignItems: "center",
                     marginLeft: "0",

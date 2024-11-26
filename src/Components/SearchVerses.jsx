@@ -24,9 +24,9 @@ const handleChange=(e)=>{
         alignItems: 'center',
         borderTop: '2px solid grey',
         borderBottom: '2px solid grey',
-        padding: '1rem',
-        width: '100%',
-        margin: '0 14vmax',
+        padding: {lg:'1rem 2rem',xs:"1rem 0rem"},
+        width: '90%',
+        margin: '0 1vmax',
       }}
     >
       {/* Left Side: Verses Label */}

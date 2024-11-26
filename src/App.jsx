@@ -11,6 +11,7 @@ import CardDetails from './Pages/CardDetails'
 import {ThemeContext,themes} from './context/themeContext'
 import Footer from './Components/Footer'
 import SearchResults from './Components/SearchResults'
+import VerseDetail from './Components/VerseDetail'
 
 
 function App() {
@@ -32,6 +33,8 @@ function App() {
         <Route path="/" element={<Home/>}/>
        
         <Route path="/chapter/:id" element={<CardDetails/> }/>
+       
+       <Route path="/chapter/:id/verse/:verseNo" element={<VerseDetail/>}/>
         <Route path="/quotes"element={<Quotes/>}/>
         <Route path="/about" element={<About/>}/>
         <Route path="/donate" element={<Donate/>}/>
