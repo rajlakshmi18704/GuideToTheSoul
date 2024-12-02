@@ -1,15 +1,21 @@
 import {React , useState }from 'react'
 import styles from './Navbar.module.css'
-import { AppBar, Toolbar, Button, TextField, Typography,Stack,InputAdornment } from '@mui/material';
+import { AppBar, Toolbar, Button, TextField, Typography,Stack,InputAdornment, Avatar } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
+import { UserAuth } from '../context/AuthContext';
 import MenuIcon from '@mui/icons-material/Menu';
+import { useNavigate } from 'react-router-dom';
 import { Menu, MenuItem, IconButton } from '@mui/material';
+import {Box} from '@mui/material'
 import DarkModeIcon from '@mui/icons-material/DarkMode';
 import LightModeIcon from '@mui/icons-material/LightMode';
-import {NavLink,useNavigate} from 'react-router-dom';
+import {NavLink} from 'react-router-dom';
 import {ThemeContext} from '../context/themeContext'
 import { useContext } from 'react';
 function Navbar() {
+  const {user,logOut}=UserAuth()
+  
+  // console.log(user.email)
   const [anchorEl, setAnchorEl] = useState(null);
   const {theme,handleOnclick}=useContext(ThemeContext)
   const open = Boolean(anchorEl);
@@ -27,7 +33,16 @@ function Navbar() {
     navigate(path); // Navigate to the selected route
     // handleMenuClose(); // Close the menu after navigating
   };
-  // Handle menu close
+  const handleLogout=()=>{
+    try{
+      console.log("logOut")
+logOut()
+navigate("/LogIn")
+    }
+    catch(error){
+console.log(error)
+    }
+  }
  
   
  
@@ -128,11 +143,72 @@ function Navbar() {
          ) : (
             <DarkModeIcon   onClick={handleOnclick}sx={{ fontSize: "2rem",color:"black"  }} />
          )}
+       
+ 
+ {user?.email?(
+  <div>
+  {/* Avatar Button */}
+  <Button
+    sx={{
+      color: theme === 'dark' ? 'white' : 'black',
+      fontSize: '1.5rem',
+      display: 'flex',
+    }}
+    onClick={handleMenuOpen}
+  >
+    <Avatar sx={{ backgroundColor: 'red' }}>
+      {user?.email?.charAt(0).toUpperCase() || '?'}
+    </Avatar>
+  </Button>
 
+
+  <Menu
+    anchorEl={anchorEl}
+    open={Boolean(anchorEl)}
+    onClose={handleMenuClose }
+    sx={{
+      mt: 1, 
+    }}
+  >
+ 
+    <MenuItem onClick={handleMenuClose }>
+      <NavLink
+        to="/savedSlokas"
+        style={{
+          textDecoration: 'none',
+          color: 'inherit',
+        }}
+      >
+        Saved Slokas
+      </NavLink>
+    </MenuItem>
+
+    <MenuItem
+      onClick={() => {
+        handleLogout();
+        handleMenuClose ();
+      }}
+    >
+      Logout
+    </MenuItem>
+  </Menu>
+</div>)
+         :(
+          <Box>
+          <NavLink to="/LogIn"  style={{ textDecoration: 'none',fontSize:'16px' }}>
+                    {/* <Typography sx={{color:theme==='dark'?"white":"black",fontSize:'1.5rem',display:"flex",}} > */}
+           <Avatar/>
+                    {/* </Typography> */}
+                  </NavLink>
+                   </Box> 
+         )
+           
+         }
+  
       <IconButton 
          onClick={handleMenuOpen}
         sx={{ 
-          display: { xs: 'flex', md: 'none' },  // Only show on small devices
+          display: { xs: 'flex', md: 'none' },  
           marginLeft: '5px'
         }}
       >
@@ -148,7 +224,7 @@ function Navbar() {
           style: {
             width: '200px',
             backgroundColor: theme === 'dark' ? 'black' : 'white',
-            color: theme === 'dark' ? 'white' : 'black', // Adjusts text color for better visibility
+            color: theme === 'dark' ? 'white' : 'black', 
           
           }
         }}

@@ -12,7 +12,11 @@ import {ThemeContext,themes} from './context/themeContext'
 import Footer from './Components/Footer'
 import SearchResults from './Components/SearchResults'
 import VerseDetail from './Components/VerseDetail'
-
+import SignIn from './Pages/SignIn'
+import LogIn from './Pages/LogIn'
+import { AuthContextProvider } from './context/AuthContext';
+import ProtectedRoute from './Components/ProtectedRoute'
+import SavedSlokas from './Pages/SavedSlokas'
 
 function App() {
 
@@ -26,11 +30,20 @@ function App() {
     <>
     
     <ThemeContext.Provider value={{theme,handleOnclick}}>
-    <Router>
+      <AuthContextProvider>
+      <Router>
       <Navbar/>
         <Routes>
-     
-        <Route path="/" element={<Home/>}/>
+   <Route path='/' element={<Home/>}/>
+        <Route
+            path='/savedSlokas'
+            element={
+              <ProtectedRoute>
+            <SavedSlokas/>
+              </ProtectedRoute>
+            }
+          />
+           
        
         <Route path="/chapter/:id" element={<CardDetails/> }/>
        
@@ -38,12 +51,16 @@ function App() {
         <Route path="/quotes"element={<Quotes/>}/>
         <Route path="/about" element={<About/>}/>
         <Route path="/donate" element={<Donate/>}/>
+        <Route path="/SignIn" element={<SignIn/>}/>
+        <Route path="/LogIn" element={<LogIn/>}/>
         <Route path="/searchResults" element ={<SearchResults/>}/>
         </Routes>
         <Footer/>
       </Router>
-      
+      </AuthContextProvider>
     </ThemeContext.Provider>
+ 
+   
     
    
      
