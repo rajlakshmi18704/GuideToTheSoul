@@ -1,4 +1,4 @@
-import { Box, Typography } from '@mui/material'
+import { Button,Box, Typography } from '@mui/material'
 import React from 'react'
 import { ThemeContext } from '../context/themeContext';
 import { useContext } from 'react';
@@ -35,6 +35,7 @@ const {id,verseNo}=useParams()
     fontSize:{xs:"15px",lg:"24px"},height:{lg:"3vmax",xs:"34vmax"},padding:{lg:"0.4vmax 0.3rem"},}}>
         {englishTranslation ? englishTranslation.description : 'English translation not available'}
       </Typography>
+      
    </Box>
   )
 }

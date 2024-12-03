@@ -1,14 +1,20 @@
 import React, { useEffect, useState,useContext } from 'react'
-import { Box, Typography ,Stack} from '@mui/material'
+import {Button, Box, Typography ,Stack} from '@mui/material'
 import { options } from '../utils/fetchData'
-import { useNavigate, useParams } from 'react-router'
+import { Navigate, useNavigate, useParams } from 'react-router'
 import { ThemeContext } from '../context/themeContext';
 import forwardArrow from'../assets/forwrdArrow.png'
 import backArrow from '../assets/backArrow.png'
+import { UserAuth } from '../context/AuthContext';
+import { useFireStore } from '../utils/fireStorejs';
 function VerseDetail() {
+  const {user}=UserAuth()
+  // console.log(user)
+  const {addToSaveSlokas,RemoveSlokas,checkIfSlokaSaved}=useFireStore()
     const {id,verseNo}=useParams()
     const navigate=useNavigate()
     const {theme}=useContext(ThemeContext)
+    const[isSavedSloka,setIsSaveedSlokas]=useState(false)
     const [detail,setDetail]=useState([])
     const fetchDetail=async()=>{
       const data=  await  fetch(`https://bhagavad-gita3.p.rapidapi.com/v2/chapters/${id}/verses/${verseNo}/`,options)
@@ -16,6 +22,58 @@ function VerseDetail() {
       setDetail(res)
       console.log(res)
     }
+  const handleSavedSlokas= async ()=>{
+    if(!user){
+      navigate('/LogIn')
+      return;
+    }
+      const data={
+        id:detail?.id,
+        translation:detail?.translations[0].description,
+        slug:detail?.slug
+      }
+     
+      const dataId = detail?.id?.toString();
+      console.log(dataId)
+await addToSaveSlokas(user?.uid,dataId,data);
+ const isSavedSlokaList =await checkIfSlokaSaved(user?.uid,dataId)
+ setIsSaveedSlokas(isSavedSlokaList
+ )     
+
+ console.log(isSavedSlokaList)
+ console.log("User ID:", user?.uid);
+console.log("Data ID:", dataId);
+
+    };
+    useEffect(()=>{
+if(!user){
+  setIsSaveedSlokas(false)
+  return;
+}
+
+const fetchSlokaStatus = async () => {
+  try {
+    const isSaved = await checkIfSlokaSaved(user?.uid, detail?.id?.toString());
+    setIsSaveedSlokas(isSaved);
+  } catch (error) {
+    console.error("Error checking if sloka is saved:", error);
+  }
+};
+fetchSlokaStatus();
+    },[id,user,checkIfSlokaSaved]);
+    const handleRemoveSloka=async()=>{
+      const dataId = detail?.id?.toString();
+      console.log("User ID:", user?.uid);
+console.log("Data ID:", dataId);
+
+await RemoveSlokas(user?.uid,dataId
+     );
+     const isSettoSaved=await checkIfSlokaSaved(user?.uid,dataId);
+ setIsSaveedSlokas(isSettoSaved)
+
+     console.log(isSettoSaved)
+     
+    };
     useEffect(()=>{
 fetchDetail()
     },[id,verseNo])
@@ -66,7 +124,18 @@ paddingTop:{lg:"12%",xs:"35%"},
         ,padding:{lg:"4vmax"}
       }}>
 
-      
+{
+ isSavedSloka ?(
+    <Button sx={{ color:theme==="dark"?"white":"black" ,width:{xs:"60%"}}} onClick={handleRemoveSloka}>
+      Remove Sloka
+      </Button>  
+  ):(
+    <Button sx={{ color:theme==="dark"?"white":"black" ,width:{xs:"60%"}}} onClick={handleSavedSlokas}>
+    Add Sloka
+    </Button> 
+  )
+  
+}
     <Typography variant='h2' sx= {{color:theme==="dark"?"white":"black",fontSize:{xs:"2rem",}}}>
     BG {detail.chapter_number}.{detail.verse_number}
     </Typography>
@@ -101,6 +170,7 @@ paddingTop:{lg:"12%",xs:"35%"},
       ).map((translation) => translation.description).join(", ") || "No description available"
     }
     </Typography>
+   
     </Box>
     </Box>
     <Box sx={{
