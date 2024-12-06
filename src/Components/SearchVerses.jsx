@@ -42,7 +42,12 @@ const handleChange=(e)=>{
           variant="outlined"
           placeholder="Enter a number"
           size="small"
-          sx={{width:{lg:"14vmax"},color:theme==="dark"?"white":"black",borderColor:theme==="dark"?"grey":"white"}}
+          sx={{width:{lg:"14vmax"},borderColor:"orange",color:theme=="dark"?"grey":"white",
+          "& .MuiInputBase-input::placeholder": {
+            color: "grey", // Set placeholder color
+            opacity: 1,    // Ensure it's visible
+          },
+        }}
     onChange={handleChange}
           InputProps={{
             inputProps: { min: 1, max: 18 }, // Limit input between 1 and 18

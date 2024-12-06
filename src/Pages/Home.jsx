@@ -27,6 +27,7 @@ function Home() {
         flexDirection: "row", 
         flexWrap: "wrap", 
         gap: "1vmax",
+        minWidth:"100vmax"
         }}
         className={`mainhome`}
         >

@@ -20,7 +20,7 @@ function Footer() {
         <>
             <Box
                 sx={{
-                  
+                
                     backgroundColor: theme === "dark" ? "#1A1A1A" : "white",
                     display:{xs:"none",lg:"flex"},
                     flexDirection: "column",

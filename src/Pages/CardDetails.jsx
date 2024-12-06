@@ -58,9 +58,9 @@ fetchDetails()
       flexDirection: "column",
       alignItems: "center",
       width:  {lg:"100%" ,xs:"100%"},
-      padding: { xs: "  8vmax 0vmax", lg: "4vmax 0" },
+      padding: { xs: "  2vmax 0", lg: "1vmax 0" },
       
-   paddingTop:{lg:"10%",xs:"20%"},
+   paddingTop:{lg:"1%",xs:"20%"},
   backgroundColor:theme==="dark"?"#1A1A1A":"white",
       // Responsive padding
     }}>

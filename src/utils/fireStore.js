@@ -1,5 +1,6 @@
 import { db } from "./firebase";
 import {addDoc,collection,deleteDoc,doc,getDoc, getDocs,setDoc,} from "firebase/firestore";
+import { useCallback } from "react";
 export const useFireStore=()=>{
     const addDocument=async(collectionName,data)=>{
         const docRef = await addDoc(collection(db, collectionName), data);
@@ -57,13 +58,23 @@ catch(error){
     console.log(error)
 }
     }
+    const getSavedSlokas=useCallback(async (userId) => {
+        const querySnapshot = await getDocs(
+          collection(db, "users", userId, "savedSlokas")
+        );
+        const data = querySnapshot.docs.map((doc) => ({
+          ...doc.data(),
+        }));
+        return data;
+      }, []);
  
   
 return {
     addDocument,
    addToSaveSlokas,
     RemoveSlokas,
-    checkIfSlokaSaved
+    checkIfSlokaSaved,
+    getSavedSlokas,
 }
 }
 

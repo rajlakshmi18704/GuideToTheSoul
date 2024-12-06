@@ -6,7 +6,7 @@ import { ThemeContext } from '../context/themeContext';
 import forwardArrow from'../assets/forwrdArrow.png'
 import backArrow from '../assets/backArrow.png'
 import { UserAuth } from '../context/AuthContext';
-import { useFireStore } from '../utils/fireStorejs';
+import { useFireStore } from '../utils/fireStore.js';
 function VerseDetail() {
   const {user}=UserAuth()
   // console.log(user)

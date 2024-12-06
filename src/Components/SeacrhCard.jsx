@@ -14,13 +14,11 @@ function SeacrhCard({transliteration,slug,  description}) {
       setDetail(res)
       console.log(res)
     }
-//     useEffect(()=>{
-// fetchDetail()
-//     },[id,verseNo])
+
   return (
-   <Box sx={{backgroundColor:"lightOrange",border:"2px solid grey",height:"2vmax",color:theme==="dark"?"white":"black" ,
-    justifyContent:"center",margin:"0 2vmax",padding:"2vmax",
-   display:"flex",flexDirection:"column"}} >
+   <Box sx={{border:"2px solid grey",height:"2vmax" , backgroundColor: theme === "dark" ? "#252525" : "white",
+    justifyContent:"center",margin:"0 2vmax",padding:"2vmax",height:{xs:"6vmax"},
+   display:"flex",flexDirection:"column",color: theme === "dark" ? "white" : "#252525"}} >
 <Typography sx={{color:"orange",fontWeight:"Bold",fontSize:"1.7vmax"}}>
    {slug}
 </Typography>

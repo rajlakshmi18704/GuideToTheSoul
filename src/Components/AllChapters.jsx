@@ -21,7 +21,7 @@ fetchData()
   return (
     <>
     
-    <Box sx={{margin:"20px 40px",backgroundColor:theme==="dark"?"black":"white",width:"100%",height:"60%"}}>
+    <Box sx={{margin:"20px 40px",backgroundColor:theme==="dark"?"black":"white",minWidth:"100vmax",height:"60%"}}>
     <Typography sx={{color:theme==="dark"?"white":"black", height:"20%", margin: "10px 90px",fontSize:{lg:"3vmax",xs:"4vmax"},
     fontWeight:"700",textAlign:"start",marginBottom:"1vmax"}}>
       Chapters</Typography>
@@ -31,7 +31,7 @@ fetchData()
      }}>
         
       {
-data.map((chapter)=>{
+data?.map((chapter)=>{
     return (
 
   <ChapterCard key={chapter.id} details={chapter} maxlength={maxlength} />

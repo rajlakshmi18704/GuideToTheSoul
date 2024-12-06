@@ -20,8 +20,9 @@ const {id,verseNo}=useParams()
         },
       }} 
       onClick={() => {
-        console.log("clicked")
-        nav(`/chapter/${id}/verse/${verse.verse_number}`);  
+    
+        nav(`/chapter/${id}/verse/${verse.verse_number}`); 
+        console.log("fetched") 
       }} 
       >
     <Typography variant='h6'sx={{color:"orange",width:{xs:"17vmax",lg:"10vmax"},

@@ -54,14 +54,14 @@ console.log(error)
   }}>
    <Toolbar >
     <Stack  sx={{ width: { lg: '25vmax', xs: '150px' }, marginRight: '1.5rem',display:"flex",
-    justifyContent:"space-between",}}>
+    justifyContent:"space-between",alignItems:"center"}}>
     <Typography variant='h4'sx={{ color:theme==='dark'?"white":"black", fontWeight: 
       '700',fontSize:'2rem',  display: 'inline-block',   padding: '12px 10px',   }} >
       Bhagwad Gita</Typography>
     </Stack>
   
 <Stack  sx={{   display: { xs: 'none',md: 'none' , sm: 'none',lg: 'flex' },width:{lg:"40%",xs:"0"},flexDirection:
- 'row',marginLeft:"23px",justifyContent:"space-between" ,  marginRight: { xs: '10px', sm: '0' }, }}>
+ 'row',marginLeft:"23px",justifyContent:"space-between" ,padding:"2rem 0",  marginRight: { xs: '10px', sm: '0' },textAlign:"center" }}>
 <NavLink to="/" style={{textDecoration: 'none' ,}}>
           <Typography sx={{color:theme==='dark'?"white":"black",fontSize:'1.5rem'}} >
             Home
@@ -82,7 +82,7 @@ console.log(error)
           </Typography>
         </NavLink>
         <NavLink to="/donate"  style={{ textDecoration: 'none',fontSize:'16px' }}>
-          <Typography sx={{color:theme==='dark'?"white":"black",fontSize:'1.5rem',display:"flex",}} >
+          <Typography sx={{color:theme==='dark'?"white":"black",fontSize:'1.5rem',display:"flex",marginRight:"2vmax"}} >
           Quotes
           </Typography>
         </NavLink>
@@ -96,40 +96,27 @@ console.log(error)
    
   }}>
          
-        <TextField
-          variant="outlined"
-          size="small"
-          placeholder="Search..."
-          sx={{ marginLeft: 'auto', backgroundColor:theme==='dark'?"black":"white",
-          '& .MuiOutlinedInput-root': {
-            '& fieldset': {
-              borderColor: 'gray', // Default border color
-            },
-            '&:hover fieldset': {
-              borderColor: 'gray', // Border color on hover
-            },
-            '&.Mui-focused fieldset': {
-              borderColor: 'orange', // Border color when focused
-            },color:theme==='dark'?"white":"black"
-          }, }}  onChange={(e)=>{
-            setSearchedValue(e.target.value)
-          }}
-          InputProps={{
-            startAdornment: (
-              <InputAdornment position="start">
-                <SearchIcon onClick={()=>{
+        
+        <Box sx={{color:theme==='dark'?"white":"black"
+,height:"2vmax",display:"flex",justifyContent:"center",alignItems:"center",padding:"0 2vmax",
+border:"2px solid grey",borderRadius:"3px",padding:" 0 2rem",
+"&:hover": {
+      borderColor: "orange", 
+    },
+        }}>
+          <SearchIcon  sx={{color:theme==='dark'?"white":"black"}}onClick={()=>{
                   console.log(searchedValue)
- handleNavigation(`/SearchResults?query=${searchedValue}`);
-}
-                }
- 
-                
-                sx={{color:theme==="dark"?"white":"black"}}/>
-              </InputAdornment>
-            ),
-          }}
-    
-        />
+ handleNavigation(`/SearchResults?query=${searchedValue}`); 
+}}/>
+          <input placeholder='Search...' 
+          style={{border:"none",backgroundColor:theme==='dark'?"#252525":"white",height:"60%",
+
+outline:"none",
+
+          }} onChange={(e)=>{
+            setSearchedValue(e.target.value)}}
+          />
+        </Box>
     
         </Stack>
         <Stack sx={{  marginLeft: { 
@@ -209,7 +196,7 @@ console.log(error)
          onClick={handleMenuOpen}
         sx={{ 
           display: { xs: 'flex', md: 'none' },  
-          marginLeft: '5px'
+          marginLeft: '2px'
         }}
       >
         <MenuIcon sx={{ fontSize: '2rem' ,}} />
@@ -222,18 +209,59 @@ console.log(error)
         onClose={handleMenuClose}
         PaperProps={{
           style: {
-            width: '200px',
+            width: '100vmax',
             backgroundColor: theme === 'dark' ? 'black' : 'white',
             color: theme === 'dark' ? 'white' : 'black', 
-          
+            
           }
         }}
        
       >
-       <MenuItem onClick={() => handleNavigation('/')}>Home</MenuItem>
-        <MenuItem onClick={() => handleNavigation('/about')}>About</MenuItem>
-        <MenuItem onClick={() => handleNavigation('/donate')}>Donate</MenuItem>
-        <MenuItem onClick={() => handleNavigation('/quotes')}>Quotes</MenuItem>
+         <MenuItem>
+              <Box
+                sx={{
+                  display: "flex",
+                  alignItems: "center",
+                  border: "2px solid grey",
+                  borderRadius: "3px",
+                 width:"100%",
+                  "&:hover": {
+                    borderColor: "orange",
+                  },
+                }}
+              >
+                <SearchIcon
+                  sx={{ color: theme === "dark" ? "white" : "black" }}
+                  onClick={() =>{
+                    handleNavigation(`/SearchResults?query=${searchedValue}`); handleMenuClose();
+                  }
+                   
+                  }
+                  
+                />
+                <input
+                  placeholder="Search..."
+                  style={{
+                    border: "none",
+                    backgroundColor: theme === "dark" ? "#252525" : "white",
+                    outline: "none",width:"80%",height:"100%",
+                    color: theme === "dark" ? "white" : "black",
+                  }}
+                  onChange={(e) => setSearchedValue(e.target.value)}
+                />
+              </Box>
+            </MenuItem>
+       <MenuItem onClick={() => {handleNavigation('/')
+        handleMenuClose(); 
+       }}>Home</MenuItem>
+        <MenuItem onClick={() => {handleNavigation('/about')
+          handleMenuClose();
+        } }>About</MenuItem>
+        <MenuItem onClick={() =>{handleNavigation('/donate') 
+          handleMenuClose();} }>Donate</MenuItem>
+        <MenuItem onClick={() => {handleNavigation('/quotes')
+          handleNavigation('/donate')
+        }}>Quotes</MenuItem>
       </Menu>
         </Stack>
        
