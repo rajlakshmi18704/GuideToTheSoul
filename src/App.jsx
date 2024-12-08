@@ -1,10 +1,10 @@
-import { useState } from 'react'
+import { useState,useEffect } from 'react'
 import {BrowserRouter as Router,Route,Routes,Link} from "react-router-dom"
 
 import './App.css'
 import Home from './Pages/Home'
 import About from './Pages/About'
-import Donate from './Pages/Donate'
+
 import Quotes from './Pages/Quotes'
 import Navbar from './Components/Navbar'
 import CardDetails from './Pages/CardDetails'
@@ -17,14 +17,23 @@ import LogIn from './Pages/LogIn'
 import { AuthContextProvider } from './context/AuthContext';
 import ProtectedRoute from './Components/ProtectedRoute'
 import SavedSlokas from './Pages/SavedSlokas'
+import Gallery from './Pages/Gallery'
 
 function App() {
 
   const [theme,setTheme] = useState(themes.light)
+  useEffect(() => {
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme) {
+      setTheme(savedTheme); 
+    }
+   
+  }, []);
   const handleOnclick=()=>{
     console.log("clicked")
-    theme==themes.light?setTheme(themes.dark):setTheme(themes.light)
-    console.log(theme)
+  const newTheme=  theme==themes.light?themes.dark:themes.light
+    setTheme(newTheme)
+    localStorage.setItem('theme', newTheme); 
   }
   return (
     <>
@@ -50,7 +59,7 @@ function App() {
        <Route path="/chapter/:id/verse/:verseNo" element={<VerseDetail/>}/>
         <Route path="/quotes"element={<Quotes/>}/>
         <Route path="/about" element={<About/>}/>
-        <Route path="/donate" element={<Donate/>}/>
+        <Route path="/gallery" element={<Gallery/>}/>
         <Route path="/SignIn" element={<SignIn/>}/>
         <Route path="/LogIn" element={<LogIn/>}/>
         <Route path="/searchResults" element ={<SearchResults/>}/>

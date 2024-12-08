@@ -22,15 +22,19 @@ function SearchResults() {
         const response = await fetch(`https://bhagavad-gita3.p.rapidapi.com/v2/chapters/${chapter}/verses/`, options)
         const chapterVerses = await response.json();
         allVerses.push(...chapterVerses);
-
+       
       }
 
       setData(allVerses);
-      if (allVerses.length>0) setIsLoading(false)
+     
 
     } catch (error) {
       console.error("Error fetching verses:", error);
     }
+    finally{
+      setIsLoading(false)
+    }
+  
   };
 
   useEffect(() => {
@@ -57,42 +61,60 @@ function SearchResults() {
 
   return (
     <Box sx={{
-      paddingTop: "4vmax", marginTop: "0",justifyContent:"center"
+      paddingTop: "4vmax", marginTop: "0",justifyContent:"center",height:{xs:"100%"},minHeight:"100vh"
 ,      backgroundColor: theme === "dark" ? "#252525" : "white", color: theme === "dark" ? "white" : "black",
-      minHeight: "50vh", width: "100vw",paddingLeft:{xs:"4vmax",lg:"8vmax"},paddingRight:{xs:"4vmax",lg:"4vmax"},
+     width:{lg:"100vmax",xs:"100vmax"} ,paddingLeft:{xs:"4vmax",lg:"1vmax"},paddingRight:{xs:"4vmax",lg:"2vmax"},
     }}>
 
       <Typography variant='h2' sx={{
-        paddingTop: {xs:"14vmax",lg:"3vmax"},fontSize:{lg:"3vmax",xs:"8vmax"},
+        paddingTop: {xs:"12vmax",lg:"3vmax"},fontSize:{lg:"3vmax",xs:"4vmax"},
         justifyContent: "center", alignItems: "center",fontWeight:"700"
       }}>RESULTS</Typography>
-      <Typography  variant="h4"sx={{color:"orange",fontWeight:"Bold",paddingBottom:"2vmax ",borderBottom:"2px solid grey"}}>Search Results for :{query}</Typography>
+      <Typography  variant="h4"sx={{color:"orange",fontWeight:"Bold",paddingBottom:"2vmax ",
+      fontSize:{xs:"3vmax"},
+        borderBottom:"2px solid grey"}}>Search Results for :{query}</Typography>
       {filteredData && filteredData.length > 0 ? (
         filteredData.map((verse) => (
-          <div key={verse.id} style={{ margin: "4vmax" }}>
-            <SeacrhCard slug={verse.slug} transliteration={verse.transliteration}
-              description={verse.translations[4].description
+          <Box key={verse.id}   sx={{
+            margin:{lg:"4vmax",xs:"2vmax"}
+          }}>
+            <SeacrhCard  verse={verse} 
+             
+              />
 
-              } />
-
-          </div>
+          </Box>
         ))
       ) : (
         <div></div>
       )}
-      {isLoading ? (
-        <Box sx={{
-          paddingBottom: "40vmax",paddingLeft:"3vmax",paddingTop:"3vmax",color:"orange"
-        }}>Loading...</Box>
+     {isLoading ? (
+        <Box
+          sx={{
+            paddingBottom: '40vmax',
+            paddingLeft: '3vmax',
+            paddingTop: '3vmax',
+            color: 'orange',
+          }}
+        >
+          Loading...
+        </Box>
+      ) : filteredData.length === 0 ? (
+        <Typography
+          variant="h4"
+          sx={{
+            padding: '0 4vmax',
+            color: 'orange',
+          }}
+        >
+          NO Results
+        </Typography>
       ) : (
-        <Typography variant='h4' sx={{padding:"0 4vmax",color:"orange",}}>NO Results</Typography>
-      )
-      }
-
-
-
-      {/* <SeacrhCard/> */}
-
+        filteredData.map((verse) => (
+          <Box key={verse.id} sx={{ margin: { lg: '4vmax', xs: '2vmax',display:"flex",justifyContent:"center" } }}>
+            <SeacrhCard verse={verse} />
+          </Box>
+        ))
+      )}
     </Box>
   )
 }

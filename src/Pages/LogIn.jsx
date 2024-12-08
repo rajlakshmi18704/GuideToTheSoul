@@ -3,6 +3,7 @@ import { Box, Button, Typography } from '@mui/material'
 import TextField from '@mui/material/TextField';
 import { UserAuth } from '../context/AuthContext';
 import { Navigate, useNavigate } from 'react-router';
+import { Password } from '@mui/icons-material';
 function LogIn() {
  const {user,logIn} =UserAuth()
     const [formData,setFormData]=useState({
@@ -66,11 +67,14 @@ function LogIn() {
     navigate('/')
     }
     catch(error){
-    console.log(error)
-    setErrors((prevErrors) => ({
-      ...prevErrors,
-      password: 'Wrong password',
-    }));
+      if(formData.password.length >0){
+        console.log(error)
+        setErrors((prevErrors) => ({
+          ...prevErrors,
+          password: 'Wrong password',
+        }));
+      }
+ 
     }
     
       }
@@ -78,15 +82,17 @@ function LogIn() {
       return (
       <Box sx={{backgroundImage:
         `url("https://media.istockphoto.com/id/1221853131/photo/opened-bhagavad-gita-and-rosary-lying-on-a-wooden-table.jpg?s=612x612&w=0&k=20&c=x6X6pHOMfZ7UnO-8VHWurdFcdKBn2XMXQeqHO8OyHjM=")`,
-    height:"100%",width:"100vmax",
-    backgroundSize: "cover",height: "100vh", backgroundPosition: "center",
-    display: "flex",
-    justifyContent:"center",alignItems:"center"
+    width:{xs:"100%",lg:"100vmax"},
+    backgroundSize: "cover",height: {lg:"100%",xs:"100%"}, backgroundPosition: "center",minHeight:{xs:"100vh"},
+    minWidth:{xs:"100vw"}
+  ,  display: "flex",
+    justifyContent:"center",
     
       }}>
 <Box sx={{display:"flex",justifyContent:"center",
-    padding:"3vmax 0",borderRadius:"0.4vmax",opacity:"0.8",
-    alignItems:"center",hieght:"25vmax",width:"25vmax",backgroundColor:"paleturquoise"}}>
+    padding:"1vmax 0",borderRadius:"0.4vmax",opacity:"0.8",height:{lg:"35%",xs:"55%"},
+    marginTop:{lg:"15vmax",xs:"22vmax"},marginBottom:{lg:"5vmax",xs:"12vmax"},
+    alignItems:"center",width:{lg:"25vmax",xs:"50vmax"},backgroundColor:"paleturquoise",}}>
 <form > 
               <Box  sx={{display:"flex",   
           justifyContent:"center",alignItems:"center",flexDirection:"column", padding:"0vmax 0"

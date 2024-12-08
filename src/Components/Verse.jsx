@@ -26,14 +26,14 @@ const {id,verseNo}=useParams()
       }} 
       >
     <Typography variant='h6'sx={{color:"orange",width:{xs:"17vmax",lg:"10vmax"},
-    fontSize:{xs:"15px",lg:"24px"}, margin:"1vmax 0",paddingBottom:{xs:"18px"},
+    fontSize:{xs:"19px",lg:"24px"}, margin:"1vmax 0",paddingBottom:{xs:"10px"},
     paddingLeft:{lg:"  10rem"}}} >
      Verse  {verse.verse_number
       }
     </Typography>
     <Typography variant='h4' sx={{ margin:{xs:"3vmax 0"},color:theme==="dark"?"white":"black" ,width:{xs:"60%"
     ,lg:"90%"},
-    fontSize:{xs:"15px",lg:"24px"},height:{lg:"3vmax",xs:"34vmax"},padding:{lg:"0.4vmax 0.3rem"},}}>
+    fontSize:{xs:"19px",lg:"24px"},height:{lg:"3vmax",xs:"34vmax"},padding:{lg:"0.4vmax 0.3rem"},}}>
         {englishTranslation ? englishTranslation.description : 'English translation not available'}
       </Typography>
       

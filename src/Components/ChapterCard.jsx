@@ -15,13 +15,14 @@ Navigate(`/chapter/${id}`)
     <Box
     sx={{
       display:"flex",flexDirection:"column",
-      height: { xs: "60vmax", md: "35vmax",lg:"20vmax" }, // Responsive height
-      width: { sm: "80vw", md: "40vmax",lg:"39vmax" }, // Responsive width
+      height: { xs: "70vmax", md: "35vmax",lg:"20vmax" }, // Responsive height
+      width: { sm: "30%", md: "45vmax",lg:"36vmax" }, // Responsive width
       padding: { xs: "2vmax 3vmax", md: "1vmax 2vmax" }, // Responsive padding
       borderRadius: "1vmax",
       justifyContent:"center",
       backgroundColor:theme==="dark"?"#242424":"#FBFCFC",
-      margin: "10px 40px",
+      margin: "10px 20px",
+      marginBottom:"0",
       transition: "background-color 0.3s ease",
       '&:hover': {
         backgroundColor: theme === "dark" ? "#252525" : "#f5f5dc", // Conditional hover background color

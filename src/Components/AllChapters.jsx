@@ -21,13 +21,16 @@ fetchData()
   return (
     <>
     
-    <Box sx={{margin:"20px 40px",backgroundColor:theme==="dark"?"black":"white",minWidth:"100vmax",height:"60%"}}>
-    <Typography sx={{color:theme==="dark"?"white":"black", height:"20%", margin: "10px 90px",fontSize:{lg:"3vmax",xs:"4vmax"},
+    <Box sx={{margin:"20px 40px",backgroundColor:theme==="dark"?"#1A1A1A":"white",height:"60%",
+      width:{lg:"8vmax"}
+    }}>
+    <Typography sx={{color:theme==="dark"?"white":"black", height:"20%", margin: "10px 80px",fontSize:{lg:"3vmax",xs:"4vmax"},
     fontWeight:"700",textAlign:"start",marginBottom:"1vmax"}}>
       Chapters</Typography>
     </Box>
   
-    <Box sx={{display:"flex",flexWrap:"wrap",backgroundColor:theme==="dark"?"black":"white",alignItems:"center",
+    <Box sx={{display:"flex",flexWrap:"wrap",backgroundColor:theme==="dark"?"#1A1A1A":"white",
+    alignItems:"center",width:"100%",paddingBottom:"2rem"
      }}>
         
       {

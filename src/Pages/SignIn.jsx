@@ -26,6 +26,7 @@ function SignIn() {
     setErrors({})
   
   }
+  const Navigate=useNavigate()
   const validate = (formData) => {
     const errorsData = {}
 
@@ -51,73 +52,92 @@ function SignIn() {
     setErrors(errorsData)
     return errorsData
   }
-  const handleSubmit= (e)=>{
-   
-e.preventDefault()
-const validationErrors = validate(formData);
-if (Object.keys(validationErrors).length === 0) {
-  console.log('Form submitted successfully');
-}
-else {
-  
-  console.log('Validation failed');
-}
-try{
-  signUp(formData.email,formData.password)
-navigate('/')
-}
-catch(error){
-console.log(error)
-}
-
-  }
-  return (
-  <Box sx={{backgroundImage:
-    `url("https://media.istockphoto.com/id/1221853131/photo/opened-bhagavad-gita-and-rosary-lying-on-a-wooden-table.jpg?s=612x612&w=0&k=20&c=x6X6pHOMfZ7UnO-8VHWurdFcdKBn2XMXQeqHO8OyHjM=")`,
-height:"35rem",width:"100vmax",
-backgroundSize: "cover",height: "100vh", backgroundPosition: "center",
-display: "flex",
-justifyContent: "center",
-alignItems: "center",
-  }}>
-    <Box sx={{display:"flex",justifyContent:"center",
-    padding:"3vmax 0",borderRadius:"0.4vmax",opacity:"0.8",
-    alignItems:"center",hieght:"25vmax",width:"25vmax",backgroundColor:"paleturquoise"}}>
-        <form onSubmit={handleSubmit} > 
-          <Box  sx={{display:"flex",
-      justifyContent:"center",alignItems:"center",flexDirection:"column",}}>
-   <TextField
-      label=" Enter Your Email"             
-      variant="outlined"       
-      type="email"   name="email" value={formData.email}
+  const handleSubmit=   async(e)=>{
        
-                       
-      margin="normal"     onChange={handleChange}    
-    
-    />
-    <Typography sx={{color:"red"}}>{errors.email}</Typography>
-   
- <TextField
-      label="Enter Your Password"             
-      variant="outlined"       
-      type="password"                              
-      margin="normal" 
-       name="password" value={formData.password}
-    
+    e.preventDefault()
+    const validationErrors = validate(formData);
+    if (Object.keys(validationErrors).length === 0) {
+      console.log('Form submitted successfully');
+    }
+    else {
       
-      onChange={handleChange}        
-    />
-      <Typography sx={{color:"red"}}>{errors.password}</Typography>
-    <Button sx={{backgroundColor:"blue",hieght:"3vmax",width:"12vmax"}} onClick={handleSubmit}>Sign In</Button>
-          </Box>
-     
-        </form>
-
+      console.log('Validation failed');
+    }
+ try{
+  await    signUp(formData.email,formData.password)
+    navigate('/')
+    }
+    catch(error){
+      if(formData.password.length >0){
+        console.log(error)
+        setErrors((prevErrors) => ({
+          ...prevErrors,
+          password: 'Wrong password',
+        }));
+      }
  
-    </Box>
-
+    }
+    
+      }
+      return (
+        <Box sx={{backgroundImage:
+          `url("https://media.istockphoto.com/id/1221853131/photo/opened-bhagavad-gita-and-rosary-lying-on-a-wooden-table.jpg?s=612x612&w=0&k=20&c=x6X6pHOMfZ7UnO-8VHWurdFcdKBn2XMXQeqHO8OyHjM=")`,
+      width:{xs:"100%",lg:"100vmax"},
+      backgroundSize: "cover",height: {lg:"100%",xs:"100%"}, backgroundPosition: "center",
+      display: "flex",
+      justifyContent:"center",
+      
+        }}>
+  <Box sx={{display:"flex",justifyContent:"center",
+      padding:"1vmax 0",borderRadius:"0.4vmax",opacity:"0.8",height:{lg:"35%",xs:"55%"},
+      marginTop:{lg:"15vmax",xs:"22vmax"},marginBottom:{lg:"5vmax",xs:"12vmax"},
+      alignItems:"center",width:{lg:"25vmax",xs:"50vmax"},backgroundColor:"paleturquoise",}}>
+  <form > 
+                <Box  sx={{display:"flex",   
+            justifyContent:"center",alignItems:"center",flexDirection:"column", padding:"0vmax 0"
+            }}>
+         <TextField
+            label=" Enter Your Email"             
+            variant="outlined"       
+            type="email"   name="email" value={formData.email}
+             
+                             
+            margin="normal"     onChange={handleChange}    
+          
+          />
+          <Typography sx={{color:"red"}}>{errors.email}</Typography>
+         
+       <TextField
+            label="Enter Your Password"             
+            variant="outlined"       
+            type="password"                              
+            margin="normal" 
+             name="password" value={formData.password}
+          
+            
+            onChange={handleChange}        
+          />
+            <Typography sx={{color:"red"}}>{errors.password}</Typography>
+          <Button sx={{backgroundColor:"blue",hieght:"3vmax",width:{lg:"12vmax",xs:"15vmax"}}} onClick={handleSubmit}>
+             SignIn </Button> <Button sx={{color:"blue"}} onClick={()=>{
+                  Navigate("/LogIn")
+              }}>
+            Already an Account
+              </Button>
+              </Box>
+              </form>
+              
   </Box>
-  )
+          
+           
+            
+      
+       
+          </Box>
+      
+        
+        )
+  
 }
 
 export default SignIn

@@ -18,16 +18,23 @@ function Navbar() {
   // console.log(user.email)
   const [anchorEl, setAnchorEl] = useState(null);
   const {theme,handleOnclick}=useContext(ThemeContext)
-  const open = Boolean(anchorEl);
+  const [avatarMenuAnchor, setAvatarMenuAnchor] = useState(null);
+const [mobileMenuAnchor, setMobileMenuAnchor] = useState(null); 
   const [searchedValue,setSearchedValue]=useState("")
   const navigate=useNavigate()
-  const handleMenuOpen = (event) => {
-    setAnchorEl(event.currentTarget); 
+  const handleAvtaarMenuOpen = (event) => {
+    setAvatarMenuAnchor(event.currentTarget); 
   };
  
 
-  const handleMenuClose = () => {
-    setAnchorEl(null); 
+  const handleAvtaarMenuClose = () => {
+    setAvatarMenuAnchor(null); 
+  };
+  const handleMobileMenuOpen = (event) => {
+    setMobileMenuAnchor(event.currentTarget); 
+  };
+  const handleMobileMenuClose = () => {
+    setMobileMenuAnchor(null); 
   };
   const handleNavigation = (path) => {
     navigate(path); // Navigate to the selected route
@@ -49,19 +56,21 @@ console.log(error)
   return (
  <AppBar  
  sx={{   backgroundColor: theme === 'dark' ? '#252525' : 'white', height: { xs: "14vmax", lg: "6vmax" },  
- width: {lg:'100%',xs:"100%"} 
+ width: {lg:'100%',xs:"100%"} ,textAlign:"center",justifyContent:"center"
   // width:{lg:"25%",xs:"100vmin"}
   }}>
    <Toolbar >
-    <Stack  sx={{ width: { lg: '25vmax', xs: '150px' }, marginRight: '1.5rem',display:"flex",
+    <Stack  sx={{ width: { lg: '25vmax', xs: '150px' }, marginRight: '0.3rem',display:"flex",
     justifyContent:"space-between",alignItems:"center"}}>
     <Typography variant='h4'sx={{ color:theme==='dark'?"white":"black", fontWeight: 
-      '700',fontSize:'2rem',  display: 'inline-block',   padding: '12px 10px',   }} >
+      '700',fontSize:'2rem',  display: 'inline-block',   padding: '12px 8px',   }} >
       Bhagwad Gita</Typography>
     </Stack>
   
-<Stack  sx={{   display: { xs: 'none',md: 'none' , sm: 'none',lg: 'flex' },width:{lg:"40%",xs:"0"},flexDirection:
- 'row',marginLeft:"23px",justifyContent:"space-between" ,padding:"2rem 0",  marginRight: { xs: '10px', sm: '0' },textAlign:"center" }}>
+<Stack  sx={{   display: { xs: 'none',md: 'none' , sm: 'none',lg: 'flex' },width:{lg:"40%",xs:"60%%"},
+flexDirection:
+ 'row',marginLeft:{lg:"23px",xs:"18px"},justifyContent:{lg:"space-around",xs:"flexEnd"} ,padding:"1rem 0", 
+  marginRight: { xs: '4px', sm: '0' },textAlign:"center" }}>
 <NavLink to="/" style={{textDecoration: 'none' ,}}>
           <Typography sx={{color:theme==='dark'?"white":"black",fontSize:'1.5rem'}} >
             Home
@@ -76,16 +85,16 @@ console.log(error)
             About
           </Typography>
         </NavLink>
-        <NavLink to="/donate"  style={{ textDecoration: 'none', color: '#000000',fontSize:'2rem',fontWeight:"700" }}>
+        <NavLink to="/gallery"  style={{ textDecoration: 'none', color: '#000000',fontSize:'2rem',fontWeight:"700" }}>
           <Typography sx={{color:theme==='dark'?"white":"black",fontSize:'1.5rem'}} >
-            Donate 
+         Gallery
           </Typography>
         </NavLink>
-        <NavLink to="/donate"  style={{ textDecoration: 'none',fontSize:'16px' }}>
+        {/* <NavLink to="/donate"  style={{ textDecoration: 'none',fontSize:'16px' }}>
           <Typography sx={{color:theme==='dark'?"white":"black",fontSize:'1.5rem',display:"flex",marginRight:"2vmax"}} >
           Quotes
           </Typography>
-        </NavLink>
+        </NavLink> */}
         </Stack  >
         <Stack sx={{display:{lg:"flex"},flexDirection: 'row',width: "400px",}}>
 
@@ -120,11 +129,11 @@ outline:"none",
     
         </Stack>
         <Stack sx={{  marginLeft: { 
-      xs: "20%",  // Small devices
+      xs: "5%",  // Small devices
       sm: "8rem",  // Medium devices
       md: "12rem",  // Larger devices (Tablet and Desktop)
       lg: "4rem"  // Large devices (e.g., Large Desktop)
-    },   display:"flex",flexDirection:"row" ,alignItems:"center"}} >
+    },   display:"flex",flexDirection:"row" ,alignItems:"center",marginRight:{lg:"6vmax",xs:"2vmax"}}} >
       {theme === 'dark' ? (
             < LightModeIcon  onClick={handleOnclick} sx={{ fontSize: "2rem",color: 'yellow' }} />
          ) : (
@@ -141,7 +150,7 @@ outline:"none",
       fontSize: '1.5rem',
       display: 'flex',
     }}
-    onClick={handleMenuOpen}
+    onClick={handleAvtaarMenuOpen}
   >
     <Avatar sx={{ backgroundColor: 'red' }}>
       {user?.email?.charAt(0).toUpperCase() || '?'}
@@ -150,15 +159,20 @@ outline:"none",
 
 
   <Menu
-    anchorEl={anchorEl}
-    open={Boolean(anchorEl)}
-    onClose={handleMenuClose }
-    sx={{
-      mt: 1, 
+    anchorEl={avatarMenuAnchor}
+    open={Boolean(avatarMenuAnchor)} 
+    onClose={handleAvtaarMenuClose }
+    PaperProps={{
+      style: {
+       
+        backgroundColor: theme === 'dark' ? 'black' : 'white',
+        color: theme === 'dark' ? 'white' : 'black', 
+        
+      }
     }}
   >
  
-    <MenuItem onClick={handleMenuClose }>
+    <MenuItem onClick={handleAvtaarMenuClose }>
       <NavLink
         to="/savedSlokas"
         style={{
@@ -173,7 +187,7 @@ outline:"none",
     <MenuItem
       onClick={() => {
         handleLogout();
-        handleMenuClose ();
+        handleAvtaarMenuClose ();
       }}
     >
       Logout
@@ -181,7 +195,7 @@ outline:"none",
   </Menu>
 </div>)
          :(
-          <Box>
+          <Box sx>
           <NavLink to="/LogIn"  style={{ textDecoration: 'none',fontSize:'16px' }}>
                     {/* <Typography sx={{color:theme==='dark'?"white":"black",fontSize:'1.5rem',display:"flex",}} > */}
            <Avatar/>
@@ -193,10 +207,10 @@ outline:"none",
          }
   
       <IconButton 
-         onClick={handleMenuOpen}
+         onClick={handleMobileMenuOpen}
         sx={{ 
           display: { xs: 'flex', md: 'none' },  
-          marginLeft: '2px'
+          marginLeft: '0'
         }}
       >
         <MenuIcon sx={{ fontSize: '2rem' ,}} />
@@ -204,12 +218,12 @@ outline:"none",
 
     
       <Menu sx={{  display:{lg:"none"}}}
-        anchorEl={anchorEl}
-        open={open}
-        onClose={handleMenuClose}
+        anchorEl={mobileMenuAnchor}
+        open={Boolean(mobileMenuAnchor)}
+        onClose={handleMobileMenuClose}
         PaperProps={{
           style: {
-            width: '100vmax',
+            width: '70vmax',
             backgroundColor: theme === 'dark' ? 'black' : 'white',
             color: theme === 'dark' ? 'white' : 'black', 
             
@@ -233,7 +247,7 @@ outline:"none",
                 <SearchIcon
                   sx={{ color: theme === "dark" ? "white" : "black" }}
                   onClick={() =>{
-                    handleNavigation(`/SearchResults?query=${searchedValue}`); handleMenuClose();
+                    handleNavigation(`/SearchResults?query=${searchedValue}`); handleMobileMenuClose();
                   }
                    
                   }
@@ -252,16 +266,16 @@ outline:"none",
               </Box>
             </MenuItem>
        <MenuItem onClick={() => {handleNavigation('/')
-        handleMenuClose(); 
+        handleMobileMenuClose(); 
        }}>Home</MenuItem>
         <MenuItem onClick={() => {handleNavigation('/about')
-          handleMenuClose();
+          handleMobileMenuClose();
         } }>About</MenuItem>
-        <MenuItem onClick={() =>{handleNavigation('/donate') 
-          handleMenuClose();} }>Donate</MenuItem>
-        <MenuItem onClick={() => {handleNavigation('/quotes')
+        <MenuItem onClick={() =>{handleNavigation('/gallery') 
+          handleMobileMenuClose();} }>Gallery</MenuItem>
+        {/* <MenuItem onClick={() => {handleNavigation('/quotes')
           handleNavigation('/donate')
-        }}>Quotes</MenuItem>
+        }}>Quotes</MenuItem> */}
       </Menu>
         </Stack>
        

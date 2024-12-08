@@ -18,7 +18,7 @@ function Home() {
       }
   
   return (
-    <Box sx={{backgroundColor:theme==="dark"?"black":"white"}}>
+    <Box sx={{backgroundColor:theme==="dark"?"#1A1A1A":"white"}}>
    
 
      
@@ -27,29 +27,31 @@ function Home() {
         flexDirection: "row", 
         flexWrap: "wrap", 
         gap: "1vmax",
-        minWidth:"100vmax"
+        margin:"3vmax",
+        padding:" 0 2vmax",
+       
         }}
         className={`mainhome`}
         >
           <Box   sx={{
-            margin:"3vmax",
-            padding:"2vmax",
+           
             display:"flex",
             flexDirection:"column",
             justifyContent:"center",
             alignItems:"center",
-        width: {lg:'90vmax',xs:"100%"},
+        width: {lg:'100%',xs:"80%"},
         height: {lg:'30vmax',xs:"50vmax"},
         backgroundImage: `url(${img})`, 
         backgroundSize: "cover", 
         backgroundPosition: "center", 
+        padding:{xs:"8vmax",lg:"0"},
         backgroundRepeat: "no-repeat", 
         border: "2px solid #ccc", 
         borderRadius: "8px", 
       }}>
         <Box sx={{display:"flex",flexDirection:"column",flexWrap:"wrap",}}>
         <Typography variant='body1'sx={{display:"flex",flexDirection:"column",flexWrap:"wrap",
-       color:"white",textAlign:"center"  ,fontSize:{xs:"5vmax",lg:"4vmax",justifyContent:"center"}
+       color:"white",textAlign:"center"  ,fontSize:{xs:"5vmax",lg:"4vmax",justifyContent:"center"},paddingTop:{xs:"3vmax"}
         }}> 
         Experience the Gita
         <span style={{color:"#FEDF89",display:"block"}}>
@@ -64,7 +66,8 @@ function Home() {
        
         <button onClick={()=>{
           chapter('1')
-        }} style={{padding:"12px 24px",backgroundColor:"white",marginTop:"40px",borderRadius:"2px",outline:"none",border:"none",fontSize:"16px"}}>Read now</button>
+        }} style={{padding:"12px 24px",backgroundColor:"white",marginTop:"40px",borderRadius:"2px",outline:"none",
+        border:"none",fontSize:"16px"}}>Read now</button>
           </Box>
     
 <VerseOfTheDay/>

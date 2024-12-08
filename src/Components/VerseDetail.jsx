@@ -1,10 +1,12 @@
 import React, { useEffect, useState,useContext } from 'react'
-import {Button, Box, Typography ,Stack} from '@mui/material'
+import {Button, Box, Typography ,Stack,CircularProgress,} from '@mui/material'
 import { options } from '../utils/fetchData'
 import { Navigate, useNavigate, useParams } from 'react-router'
 import { ThemeContext } from '../context/themeContext';
 import forwardArrow from'../assets/forwrdArrow.png'
 import backArrow from '../assets/backArrow.png'
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import { UserAuth } from '../context/AuthContext';
 import { useFireStore } from '../utils/fireStore.js';
 function VerseDetail() {
@@ -16,11 +18,13 @@ function VerseDetail() {
     const {theme}=useContext(ThemeContext)
     const[isSavedSloka,setIsSaveedSlokas]=useState(false)
     const [detail,setDetail]=useState([])
+    const [loading, setLoading] = useState(true);
     const fetchDetail=async()=>{
       const data=  await  fetch(`https://bhagavad-gita3.p.rapidapi.com/v2/chapters/${id}/verses/${verseNo}/`,options)
       const res= await data.json()
       setDetail(res)
       console.log(res)
+      setLoading(false);
     }
   const handleSavedSlokas= async ()=>{
     if(!user){
@@ -77,17 +81,24 @@ await RemoveSlokas(user?.uid,dataId
     useEffect(()=>{
 fetchDetail()
     },[id,verseNo])
+    if (loading) {
+      return (
+        <Box display="flex" justifyContent="center" alignItems="center" height="100vh">
+          <CircularProgress />
+        </Box>
+      );
+    }
   return (
     <Box sx={{display:"flex",color:theme==="dark"?"white":"black",
-    backgroundColor:theme==="dark"?"#1A1A1A":"white",
-    alignItems:"center",hieght:"9vmax",paddingLeft:"4vmax"}} >
+    backgroundColor:theme==="dark"?"#1A1A1A":"white",width:{lg:"100%",xs:"100%"},
+    alignItems:"center",hieght:"100vmax",paddingLeft:{lg:"4vmax"}}} >
         <Box sx={{
 cursor: "pointer",
 backgroundColor: "black",
 position:"fixed",
+padding: "15px",
 
-width:"2rem",
-padding:"15px",
+
 left: "1rem",
 top: "50%",
 transform: "translateY(-50%)",
@@ -109,7 +120,7 @@ borderRadius: "  50%",
         </Box>
        
   
-    <Box  sx= {{width:"100%",
+    <Box  sx= {{width:{lg:"100%",xs:"100%"},
       
 paddingTop:{lg:"12%",xs:"35%"},
      paddingBottom:{xs:"12%",lg:"6%"},
@@ -120,36 +131,32 @@ paddingTop:{lg:"12%",xs:"35%"},
 
     
      
-      <Box sx={{Width:"60%",display:"flex",flexDirection:"column",textAlign:"center",justifyContent:"center"
-        ,padding:{lg:"4vmax"}
+      <Box sx={{Width:"100%",display:"flex",flexDirection:"column",textAlign:"center",
+      justifyContent:"center"
+        ,padding:{lg:"4vmax"}, 
       }}>
 
-{
- isSavedSloka ?(
-    <Button sx={{ color:theme==="dark"?"white":"black" ,width:{xs:"60%"}}} onClick={handleRemoveSloka}>
-      Remove Sloka
-      </Button>  
-  ):(
-    <Button sx={{ color:theme==="dark"?"white":"black" ,width:{xs:"60%"}}} onClick={handleSavedSlokas}>
-    Add Sloka
-    </Button> 
-  )
+
   
-}
-    <Typography variant='h2' sx= {{color:theme==="dark"?"white":"black",fontSize:{xs:"2rem",}}}>
+
+
+        <Typography variant="h4" align="center" gutterBottom>
     BG {detail.chapter_number}.{detail.verse_number}
     </Typography>
-    <Typography sx={{borderBottom:"2px solid grey",paddingBottom :"2%",fontSize:{lg:"2rem",xs:"2rem"},}}>
+    <Typography sx={{borderBottom:"2px solid grey",paddingBottom :"2%",fontSize:{lg:"2rem",xs:"1.5rem"},
+  textAlign:"center"
+  }}>
       {
  detail.transliteration
 }
     </Typography>
-    <Typography variant="h2" sx={{fontWieght:"bold",fontSize:{xs:"4vmax"}}}>
+    <Typography variant="body1" sx={{fontWieght:"bold", fontSize:{lg:"5vmax",xs:"10vmax"},
+  }}>
       Translation
     </Typography>
-    <Typography variant="h4" sx={{margin :"2%",
-        lineHeight:{lg:"4vmax",xs:"12vmax"},
-      fontSize:{xs:"1.5rem",lg:"2rem",lineHeight:{lg:"4vmax",xs:"3vmax"},padding:{lg:" 0 18vmax",xs:"0 18vmax"}}}}>
+    <Typography variant="body1" sx={{borderBottom:"2px solid grey",margin :"1%",
+      fontSize:{lg:"2vmax",xs:"3vmax"},
+      lineHeight:{lg:"4vmax",xs:"12vmax"},padding:{lg:" 0 12vmax",xs:"0 9vmax"}}}>
    
       {
       detail?.translations?.filter(
@@ -157,10 +164,10 @@ paddingTop:{lg:"12%",xs:"35%"},
       ).map((translation) => translation.description).join(", ") || "No description available"
     }
     </Typography>
-    <Typography variant="h2" sx={{fontWieght:"bold", fontSize:{lg:"5vmax",xs:"12vmax"},}}>
+    <Typography variant="h6" sx={{fontWieght:"bold", fontSize:{lg:"5vmax",xs:"10vmax"},}}>
      Commentary
-    </Typography>
-    <Typography variant="h4" sx={{borderBottom:"2px solid grey",margin :"2%",
+    </Typography >
+    <Typography variant="body" sx={{margin :"1%",
       fontSize:{lg:"2vmax",xs:"3vmax"},
       lineHeight:{lg:"4vmax",xs:"12vmax"},padding:{lg:" 0 12vmax",xs:"0 9vmax"}}}>
       
@@ -171,6 +178,16 @@ paddingTop:{lg:"12%",xs:"35%"},
     }
     </Typography>
    
+    <Box display="flex" justifyContent="center" padding={2} sx={{borderBottom:"2px solid grey"}}>
+          <Button
+            variant="contained"
+          sx={{   backgroundColor: isSavedSloka ? "red" : "orange",}}
+            startIcon={isSavedSloka ? <FavoriteIcon /> : <FavoriteBorderIcon />}
+            onClick={isSavedSloka ? handleRemoveSloka : handleSavedSlokas}
+          >
+            {isSavedSloka ? 'Remove from Favorites' : 'Add to Favorites'}
+          </Button>
+        </Box>
     </Box>
     </Box>
     <Box sx={{

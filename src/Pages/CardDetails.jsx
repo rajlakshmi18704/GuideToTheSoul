@@ -57,9 +57,9 @@ fetchDetails()
       justifyContent: "center",
       flexDirection: "column",
       alignItems: "center",
-      width:  {lg:"100%" ,xs:"100%"},
-      padding: { xs: "  2vmax 0", lg: "1vmax 0" },
-      
+      width:  {lg:"100vmax" ,xs:"60vmax"},
+      padding: { xs: "  2vmax 2vmax", lg: "1vmax 0" },
+     
    paddingTop:{lg:"1%",xs:"20%"},
   backgroundColor:theme==="dark"?"#1A1A1A":"white",
       // Responsive padding
@@ -78,16 +78,16 @@ fetchDetails()
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        fontWeight: "bold",
+        fontWeight: "bold",textAlign:"center",
         flexWrap: "wrap",
-        width:{xs:"70%",lg:"36%"},
+        width:{xs:"80%",lg:"76%"},
         fontFamily: "inherit",
         fontSize: { xs: "4vmax", lg: "3rem" },
-        marginRight:{xs:"2rem"},
+        marginRight:{xs:"2.1rem"},
         marginTop:{xs:"4%"},
         color:theme==="dark"?"white":"black",
         marginBottom:{xs:"2vmax",lg:"0.1vmax"}
-        ,
+        ,padding:{xs:"2vmax"},
         paddingTop:{xs:"1%"},
       }}>
         {chapterDetails.name_translated}
@@ -97,7 +97,7 @@ fetchDetails()
         fontSize: { sx: "2vmax", lg: "1.4vmax" }, 
         fontFamily: "inherit",
         lineHeight: { sx: "1.9vmax", lg: "2.5vmax" }, // Responsive line height
-        width: {  lg: "67vmax" }
+        width: {  lg: "67vmax",xs:"60%" }
         ,  padding: { xs: "1vmax 2vmax", lg: "1vmax" },
        color:theme==="dark"?"white":"#1A1A1A",
         
@@ -105,7 +105,7 @@ fetchDetails()
     {chapterDetails.chapter_summary}
       </Typography>
       <SearchVerses  sx={{
-        margin:{xs:"2vmax"}
+        margin:{xs:"1vmax"}
       }} setsearchTerm={setSearchTerm} />
       {searchTerm && searchedVerse ? (
         <Verse verse={searchedVerse} />

@@ -4,7 +4,7 @@ import { BorderBottom } from '@mui/icons-material'
 import { useNavigate, useParams } from 'react-router'
 import { ThemeContext } from '../context/themeContext';
 import { options } from '../utils/fetchData'
-function SeacrhCard({transliteration,slug,  description}) {
+function SeacrhCard({verse}) {
  const  {id,verseNo}=useParams()
    const nav=useNavigate()
    const {theme}=useContext(ThemeContext)
@@ -16,13 +16,16 @@ function SeacrhCard({transliteration,slug,  description}) {
     }
 
   return (
-   <Box sx={{border:"2px solid grey",height:"2vmax" , backgroundColor: theme === "dark" ? "#252525" : "white",
-    justifyContent:"center",margin:"0 2vmax",padding:"2vmax",height:{xs:"6vmax"},
-   display:"flex",flexDirection:"column",color: theme === "dark" ? "white" : "#252525"}} >
-<Typography sx={{color:"orange",fontWeight:"Bold",fontSize:"1.7vmax"}}>
-   {slug}
+   <Box sx={{border:"2px solid grey",height:{lg:"5vmax",xs:"13vmax"} , 
+   backgroundColor: theme === "dark" ? "#252525" : "white",alignItems:"center",
+    justifyContent:"center",margin:"0 1vmax",padding:"2vmax",width:{xs:"40vmax"},
+   display:"flex",flexDirection:"column",color: theme === "dark" ? "white" : "#252525"}} onClick={()=>{
+      nav(`/chapter/${verse.id}/verse/${verse.verse_number}`)
+   }} >
+<Typography sx={{color:"orange",fontWeight:"Bold",fontSize:"1.9vmax"}}>
+   {verse.slug}
 </Typography>
-<Typography variant='body1'>{transliteration}</Typography>
+<Typography variant='body1'>{verse.transliteration}</Typography>
 {/* <Typography variant='h4'>{  description}</Typography> */}
    </Box>
   )
