@@ -108,7 +108,7 @@ flexDirection:
         
         <Box sx={{color:theme==='dark'?"white":"black"
 ,height:"2vmax",display:"flex",justifyContent:"center",alignItems:"center",padding:"0 2vmax",
-border:"2px solid grey",borderRadius:"3px",padding:" 0 2rem",
+border:"2px solid grey",borderRadius:"3px",
 "&:hover": {
       borderColor: "orange", 
     },

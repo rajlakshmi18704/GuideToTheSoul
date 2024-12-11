@@ -68,7 +68,7 @@ function SavedSlokas() {
             <Box
               sx={{
                 display: "flex",
-                flexDirection: "column",
+            
                 gap: "1rem",
                 width: { xs: "80%", lg: "100vmax" },
                 alignItems: "center",

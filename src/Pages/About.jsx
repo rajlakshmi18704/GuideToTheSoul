@@ -6,7 +6,7 @@ import { ThemeContext } from '../context/themeContext';
 function About() {
   const {theme}=useContext(ThemeContext)
   return (
-    <Box sx={{  display: "flex",
+    <Box sx={{ 
       flexDirection: "column",
       alignItems: "center",
       justifyContent: "center",

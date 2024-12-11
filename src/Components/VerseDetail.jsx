@@ -146,7 +146,7 @@ paddingTop:{lg:"12%",xs:"35%"},
     display:"flex",textAlign:"center",
       flexWrap:"wrap",padding:{lg:" 0 12vmax",xs:"0 9vmax"},
    
-  textAlign:"center"
+
   }}>
       {
  detail.transliteration
