@@ -1,18 +1,20 @@
 import React, { useContext, useEffect, useState } from 'react'
 import {options} from '../utils/fetchData'
 import ChapterCard from './ChapterCard';
-import { Box, Typography } from '@mui/material';
+import { Box, Typography,CircularProgress  } from '@mui/material';
 import { ThemeContext } from '../context/themeContext';
 function AllChapters() {
   const {theme}=useContext(ThemeContext)
  const  maxlength=200
 const [data,SetData]=useState([])
+const [loading, setLoading] = useState(true);
   useEffect(()=>{
 const fetchData=async  ()=>{
   const response = await fetch('https://bhagavad-gita3.p.rapidapi.com/v2/chapters/?skip=0&limit=18', options);
 	const  chapters = await response.json();
   console.log(chapters)
 SetData(chapters)
+setLoading(false);
 }
 fetchData()
   },[])
@@ -24,7 +26,8 @@ fetchData()
     <Box sx={{margin:"20px 40px",backgroundColor:theme==="dark"?"#1A1A1A":"white",height:"60%",
       width:{lg:"8vmax"}
     }}>
-    <Typography sx={{color:theme==="dark"?"white":"black", height:"20%", margin: "10px 80px",fontSize:{lg:"3vmax",xs:"4vmax"},
+    <Typography sx={{color:theme==="dark"?"white":"black", height:"20%", 
+    margin: "10px 60px",fontSize:{lg:"3vmax",xs:"4vmax"},
     fontWeight:"700",textAlign:"start",marginBottom:"1vmax"}}>
       Chapters</Typography>
     </Box>
@@ -32,6 +35,17 @@ fetchData()
     <Box sx={{display:"flex",flexWrap:"wrap",backgroundColor:theme==="dark"?"#1A1A1A":"white",
     alignItems:"center",width:"100%",paddingBottom:"2rem"
      }}>
+
+{loading ? (
+          <CircularProgress
+            color="secondary"
+            sx={{ marginTop: '2rem' }}
+          />
+        ) : (
+          data?.map((chapter) => (
+            <ChapterCard key={chapter.id} details={chapter} maxlength={maxlength} />
+          ))
+        )}
         
       {
 data?.map((chapter)=>{

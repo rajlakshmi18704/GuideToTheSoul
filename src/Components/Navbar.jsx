@@ -119,6 +119,7 @@ border:"2px solid grey",borderRadius:"3px",padding:" 0 2rem",
 }}/>
           <input placeholder='Search...' 
           style={{border:"none",backgroundColor:theme==='dark'?"#252525":"white",height:"60%",
+            color:theme==='dark'?"white":" #252525",
 
 outline:"none",
 

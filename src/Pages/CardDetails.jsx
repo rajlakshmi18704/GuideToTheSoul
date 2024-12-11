@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom'
 import { options } from '../utils/fetchData'
 import { Box,Typography } from '@mui/material'
 import { useNavigate} from 'react-router-dom';
+import { CircularProgress} from '@mui/material';
 import { ThemeContext } from '../context/themeContext';
 import Verse from '../Components/Verse'
 import SearchVerses from '../Components/SearchVerses'
@@ -13,6 +14,7 @@ function CardDetails() {
   const[VersesDetails,setVersesDetails]=useState([])
 const [searchedVerse,setSearchedVerse]=useState("")
   const [searchTerm,setSearchTerm]=useState("")
+  const [loading, setLoading] = useState(true);
 const nav=useNavigate()
   
 
@@ -45,9 +47,27 @@ fetchDetails()
       console.log(searchedVerse);
       console.log("Searched Verse:", Verse);
      }
+    
+      setLoading(false); 
     }
   getverses()
   },[searchTerm])
+  if (loading) {
+    return (
+      <Box
+        sx={{
+          width:  {lg:"100vmax" ,xs:"60vmax"},
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          height: "100vh",
+          backgroundColor: theme === "dark" ? "#1A1A1A" : "white",
+        }}
+      >
+        <CircularProgress color="secondary" size={60} />
+      </Box>
+    );
+  }
  
   return (
     

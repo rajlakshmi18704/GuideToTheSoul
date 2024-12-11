@@ -56,13 +56,12 @@ function SignIn() {
        
     e.preventDefault()
     const validationErrors = validate(formData);
-    if (Object.keys(validationErrors).length === 0) {
-      console.log('Form submitted successfully');
+    if (Object.keys(validationErrors).length != 0) {
+     return;
     }
-    else {
-      
-      console.log('Validation failed');
-    }
+
+
+   
  try{
   await    signUp(formData.email,formData.password)
     navigate('/')

@@ -8,9 +8,11 @@ import backArrow from '../assets/backArrow.png'
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import { UserAuth } from '../context/AuthContext';
-import { useFireStore } from '../utils/fireStore.js';
+// import { useSloka } from '../context/SlokaContext';
+import { useFireStore } from '../utils/fireStore';
 function VerseDetail() {
   const {user}=UserAuth()
+  // const { savedSlokas, addSloka, removeSloka } = useSloka();
   // console.log(user)
   const {addToSaveSlokas,RemoveSlokas,checkIfSlokaSaved}=useFireStore()
     const {id,verseNo}=useParams()
@@ -113,10 +115,7 @@ borderRadius: "  50%",
       console.log("No previous verse available");
     }
         }}>
-        <img src={backArrow} sx={{
-     
-  
-      }} />
+        <img src={backArrow}  />
         </Box>
        
   
@@ -143,14 +142,17 @@ paddingTop:{lg:"12%",xs:"35%"},
         <Typography variant="h4" align="center" gutterBottom>
     BG {detail.chapter_number}.{detail.verse_number}
     </Typography>
-    <Typography sx={{borderBottom:"2px solid grey",paddingBottom :"2%",fontSize:{lg:"2rem",xs:"1.5rem"},
+    <Typography sx={{borderBottom:"2px solid grey",paddingBottom :"2%",fontSize:{lg:"2rem",xs:"3vmax" },
+    display:"flex",textAlign:"center",
+      flexWrap:"wrap",padding:{lg:" 0 12vmax",xs:"0 9vmax"},
+   
   textAlign:"center"
   }}>
       {
  detail.transliteration
 }
     </Typography>
-    <Typography variant="body1" sx={{fontWieght:"bold", fontSize:{lg:"5vmax",xs:"10vmax"},
+    <Typography variant="body1" sx={{fontWieght:"bold", fontSize:{lg:"5vmax",xs:"7vmax"},
   }}>
       Translation
     </Typography>
@@ -164,7 +166,7 @@ paddingTop:{lg:"12%",xs:"35%"},
       ).map((translation) => translation.description).join(", ") || "No description available"
     }
     </Typography>
-    <Typography variant="h6" sx={{fontWieght:"bold", fontSize:{lg:"5vmax",xs:"10vmax"},}}>
+    <Typography variant="h6" sx={{fontWieght:"bold", fontSize:{lg:"5vmax",xs:"7vmax"},}}>
      Commentary
     </Typography >
     <Typography variant="body" sx={{margin :"1%",
@@ -217,6 +219,7 @@ borderRadius: " 50% ",
        </Box>
     </Box>
   )
+
 }
 
 export default VerseDetail

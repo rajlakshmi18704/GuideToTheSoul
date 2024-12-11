@@ -1,10 +1,11 @@
-import {useEffect,React,useContext} from 'react'
+import {useEffect,React,useContext,useState} from 'react'
 import { Box, Typography } from '@mui/material'
 import { BorderBottom } from '@mui/icons-material'
 import { useNavigate, useParams } from 'react-router'
 import { ThemeContext } from '../context/themeContext';
 import { options } from '../utils/fetchData'
 function SeacrhCard({verse}) {
+   const [savedSlokas, setSavedSlokas] = useState([]);
  const  {id,verseNo}=useParams()
    const nav=useNavigate()
    const {theme}=useContext(ThemeContext)

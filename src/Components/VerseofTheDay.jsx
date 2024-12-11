@@ -6,9 +6,9 @@ function VerseOfTheDay() {
   const { theme } = useContext(ThemeContext)
   return (
     <Box sx={{
-      height: { xs: "40%", lg: "40%", md: "30%" }, width: { xs: "90%", lg: "95%" },
-      backgroundColor: theme === "dark" ? "rgb(37, 37, 37)" : "white", margin: "1vmax 2vmax"
-      , padding: { lg: "20px 40px ", xs: "20px 5px" }, display: "flex", flexWrap: "wrap", borderRadius: "1.5vmax",
+      height: { xs: "40%", lg: "40%", md: "30%" }, width: { xs: "90%", lg: "93%" },
+      backgroundColor: theme === "dark" ? "rgb(37, 37, 37)" : "white", margin: {lg:"0vmax auto"}
+      , padding: { lg: "20px 40px ", xs: "20px 3px" }, display: "flex", flexWrap: "wrap", borderRadius: "1.5vmax",
       boxShadow: "5px 10px 15px rgba(1, 0, 0, 0.3)",
       alignItems: "center",
 

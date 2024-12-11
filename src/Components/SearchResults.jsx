@@ -61,9 +61,12 @@ function SearchResults() {
 
   return (
     <Box sx={{
-      paddingTop: "4vmax", marginTop: "0",justifyContent:"center",height:{xs:"100%"},minHeight:"100vh"
-,      backgroundColor: theme === "dark" ? "#252525" : "white", color: theme === "dark" ? "white" : "black",
-     width:{lg:"100vmax",xs:"100vmax"} ,paddingLeft:{xs:"4vmax",lg:"1vmax"},paddingRight:{xs:"4vmax",lg:"2vmax"},
+      paddingTop: "4vmax", marginTop: "0",minHeight:{xs:"100vh"},
+     backgroundColor: theme === "dark" ? "#252525" : "white", color: theme === "dark" ? "white" : "black",
+display:"flex",flexDirection:"column",justifyContent:"center",
+
+     width:{lg:"100vmax",xs:"100%"} ,paddingLeft:{xs:"4vmax",lg:"1vmax"},
+     paddingRight:{xs:"4vmax",lg:"2vmax"},
     }}>
 
       <Typography variant='h2' sx={{
@@ -76,7 +79,8 @@ function SearchResults() {
       {filteredData && filteredData.length > 0 ? (
         filteredData.map((verse) => (
           <Box key={verse.id}   sx={{
-            margin:{lg:"4vmax",xs:"2vmax"}
+            margin:{lg:"4vmax",xs:"2vmax"},alignItems:"center",display:"flex", 
+             justifyContent: "center",width:"70%"
           }}>
             <SeacrhCard  verse={verse} 
              

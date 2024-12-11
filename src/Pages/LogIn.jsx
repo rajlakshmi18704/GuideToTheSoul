@@ -67,7 +67,7 @@ function LogIn() {
     navigate('/')
     }
     catch(error){
-      if(formData.password.length >0){
+      if(formData.password.length >6){
         console.log(error)
         setErrors((prevErrors) => ({
           ...prevErrors,

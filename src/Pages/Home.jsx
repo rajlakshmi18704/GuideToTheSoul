@@ -27,8 +27,8 @@ function Home() {
         flexDirection: "row", 
         flexWrap: "wrap", 
         gap: "1vmax",
-        margin:"3vmax",
-        padding:" 0 2vmax",
+        margin:{lg:"3vmax",xs:"1vmax"},
+        padding:" 0 1vmax",
        
         }}
         className={`mainhome`}
@@ -39,12 +39,12 @@ function Home() {
             flexDirection:"column",
             justifyContent:"center",
             alignItems:"center",
-        width: {lg:'100%',xs:"80%"},
+        width: {lg:'95%',xs:"80%"},
         height: {lg:'30vmax',xs:"50vmax"},
         backgroundImage: `url(${img})`, 
         backgroundSize: "cover", 
         backgroundPosition: "center", 
-        padding:{xs:"8vmax",lg:"0"},
+        padding:{xs:"6vmax 3vmax",lg:"0"},
         backgroundRepeat: "no-repeat", 
         border: "2px solid #ccc", 
         borderRadius: "8px", 
@@ -66,7 +66,9 @@ function Home() {
        
         <button onClick={()=>{
           chapter('1')
-        }} style={{padding:"12px 24px",backgroundColor:"white",marginTop:"40px",borderRadius:"2px",outline:"none",
+        }} style={{padding:"12px 20px",backgroundColor:"white",marginTop:"40px",borderRadius:"2px",outline:"none",
+
+
         border:"none",fontSize:"16px"}}>Read now</button>
           </Box>
     

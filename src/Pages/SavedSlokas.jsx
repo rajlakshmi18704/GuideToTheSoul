@@ -1,7 +1,7 @@
 import React from 'react'
 import { useState,useEffect,useContext } from 'react'
 import {useFireStore} from "../utils/fireStore";
-import { Box,Typography } from '@mui/material';
+import { Box,Typography,CircularProgress } from '@mui/material';
 import { ThemeContext } from '../context/themeContext';
 import { UserAuth } from '../context/AuthContext';
 import SavedSlokaCard from '../Components/SavedSlokaCard';
@@ -38,11 +38,14 @@ function SavedSlokas() {
           height: "100%",
           width: "100%",
           padding: { xs: "8vmax 0", lg: "4vmax 0" },
-          paddingTop: { lg: "10%", xs: "20%" },
+          paddingTop: { lg: "3%", xs: "20%" },
           backgroundColor: theme === "dark" ? "#1A1A1A" : "white",
         }}
       >
-        <Typography variant="h2" sx={{ marginBottom: "2rem", color: theme === "dark" ? "white" : "black" }}>
+        <Typography variant="h2" sx={{ marginBottom: "2rem", 
+        color: theme === "dark" ? "white" : "black" ,fontSize:{xs:"4vmax"
+
+        }}}>
      SavedSlokas
         </Typography>
   
@@ -55,6 +58,7 @@ function SavedSlokas() {
               fontWeight: 400,
               textAlign: "center",
               marginBottom: "1.5rem",
+
             }}
           >
             Loading your slokas...
@@ -66,8 +70,10 @@ function SavedSlokas() {
                 display: "flex",
                 flexDirection: "column",
                 gap: "1rem",
-                width: { xs: "90%", lg: "60%" },
+                width: { xs: "80%", lg: "100vmax" },
                 alignItems: "center",
+                justifyContent:"center",flexDirection:"column",
+               
               }}
             >
               {slokaList.map((sloka, index) => (
@@ -79,6 +85,11 @@ function SavedSlokas() {
               ))}
             </Box>
           ) : (
+            <Box sx={{ width: {lg:"100vmax",xs:"100%"},
+            minHeight:{xs:"100vh",
+              display:"flex",justifyContent:"center",textAlign:"center",
+            }}}>
+
             <Typography
               variant="h5"
               sx={{
@@ -88,6 +99,7 @@ function SavedSlokas() {
             >
               No saved slokas found.
             </Typography>
+            </Box>
           )
         )}
       </Box>
