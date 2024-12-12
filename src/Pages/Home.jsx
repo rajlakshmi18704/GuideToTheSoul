@@ -1,8 +1,8 @@
 import React from 'react'
 import styles from  "./Home.module.css"
 
-import VerseOfTheDay from '../Components/VerseOfTheDay'
-import ChapterCard from '../Components/ChapterCard'
+import VerseOfTheDay from '../Components/VerseofTheDay'
+
 import { Box, Typography } from '@mui/material'
 import img from '../assets/HomeImg.webp'
 import AllChapters from '../Components/AllChapters'
